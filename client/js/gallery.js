@@ -46,7 +46,7 @@ angular.module('nibs.gallery', [])
         var isCameraReady = false
         var videoWidth = 0
         var videoHeight = 0
-        $scope.isSelectMode = true
+        $scope.isSelectMode = false
 
         function getPictures() {
             Picture.all().success(function(pictures) {
