@@ -84,9 +84,11 @@ angular.module('nibs.gallery', [])
             var imgCheckboxs = document.getElementsByClassName('imgCheckbox')
             for(let i of imgCheckboxs) {
                 if (i.checked) {
+                    console.log('true')
                     return true
                 }
             }
+            console.log('false')
             return false
         }
 
