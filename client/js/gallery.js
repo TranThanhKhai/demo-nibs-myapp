@@ -54,6 +54,7 @@ angular.module('nibs.gallery', [])
             });
         }
         getPictures()
+        hideCheckbox()
 
         // Show and hide image checkbox
         $scope.switchMode = function() {
