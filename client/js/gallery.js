@@ -145,7 +145,7 @@ angular.module('nibs.gallery', [])
             }
         }
 
-        function switchMode() {
+        $scope.switchMode() {
             console.log($scope.isSelectMode)
             if (!isSelectMode) {
                 showCheckbox()
