@@ -54,7 +54,6 @@ angular.module('nibs.gallery', [])
             });
         }
         getPictures()
-        hideCheckbox()
 
         // Show and hide image checkbox
         $scope.switchMode = function() {
@@ -182,6 +181,7 @@ angular.module('nibs.gallery', [])
                         if (i.checked) {
                             Picture.delete(i.name)
                             .success(function(data) {
+                                $scope.isDeleteMode = false
                                 getPictures()
                             })
                             .error(function(err) {
