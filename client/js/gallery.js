@@ -80,15 +80,14 @@ angular.module('nibs.gallery', [])
             }
         }
 
-        $scope.checkCheckbox = function() {
+        function checkCheckbox() {
             var imgCheckboxs = document.getElementsByClassName('imgCheckbox')
             for(let i of imgCheckboxs) {
                 if (i.checked) {
-                    document.getElementById('btnCamera').removeAttribute('disabled')
-                    return;
+                    return true
                 }
             }
-            document.getElementById('btnCamera').setAttribute('disabled', 'disabled')
+            return false
         }
 
         // Action when click on camera button
@@ -170,22 +169,26 @@ angular.module('nibs.gallery', [])
             $state.go("app.preview", {img: img, isUpdateAvatar: false});
         };
 
-        $scope.deletePicture = function() {
-            var confirm = $window.confirm('Are you sure?')
-            if (confirm) {
-                var imgCheckboxs = document.getElementsByClassName('imgCheckbox')
+        function deletePicture() {
+            if (checkCheckbox == true) {
+                var confirm = $window.confirm('Are you sure?')
+                if (confirm) {
+                    var imgCheckboxs = document.getElementsByClassName('imgCheckbox')
 
-                for(let i of imgCheckboxs) {
-                    if (i.checked) {
-                        Picture.delete(i.name)
-                        .success(function(data) {
-                            getPictures()
-                        })
-                        .error(function(err) {
-                            $ionicPopup.alert({title: 'Sorry', content: 'Delete failed!'});
-                        })
+                    for(let i of imgCheckboxs) {
+                        if (i.checked) {
+                            Picture.delete(i.name)
+                            .success(function(data) {
+                                getPictures()
+                            })
+                            .error(function(err) {
+                                $ionicPopup.alert({title: 'Sorry', content: 'Delete failed!'});
+                            })
+                        }
                     }
                 }
+            } else {
+                $ionicPopup.alert({title: 'Sorry', content: 'You must select at least 1 picture to delete!'});
             }
         }
     });
