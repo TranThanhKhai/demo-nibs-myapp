@@ -48,6 +48,8 @@ angular.module('nibs.gallery', [])
         var videoHeight = 0
         var isSelectMode = false
 
+        $scope.isSelectMode = false
+
         function getPictures() {
             Picture.all().success(function(pictures) {
                 $scope.pictures = pictures;
@@ -151,6 +153,7 @@ angular.module('nibs.gallery', [])
                 // document.getElementById('icon-ios7-camera').style.display = 'none'
                 // document.getElementById('icon-trash-delete').style.display = 'block'
                 isSelectMode = true
+                $scope.isSelectMode = true
             } else {
                 hideCheckbox()
                 // document.getElementById('icon-trash-select').style.display = 'block'
@@ -158,6 +161,7 @@ angular.module('nibs.gallery', [])
                 // document.getElementById('icon-ios7-camera').style.display = 'block'
                 // document.getElementById('icon-trash-delete').style.display = 'none'
                 isSelectMode = false
+                $scope.isSelectMode = false
             }
             
         }
