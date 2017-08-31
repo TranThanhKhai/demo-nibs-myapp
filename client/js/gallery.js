@@ -46,6 +46,7 @@ angular.module('nibs.gallery', [])
         var isCameraReady = false
         var videoWidth = 0
         var videoHeight = 0
+        $scope.isDeleteMode = false
 
         function getPictures() {
             Picture.all().success(function(pictures) {
@@ -54,11 +55,52 @@ angular.module('nibs.gallery', [])
         }
         getPictures()
 
-        document.getElementById('btnCamera').addEventListener('click', function() {
-            if (!isCameraReady) {
-                activeCamera()
+        // Show and hide image checkbox
+        $scope.switchMode = function() {
+            if (!$scope.isDeleteMode) {
+                $scope.isDeleteMode = true
+                showCheckbox()
             } else {
-                takePicture()
+                $scope.isDeleteMode = false
+                hideCheckbox()
+            }
+        }
+
+        function showCheckbox() {
+            var imgCheckboxs = document.getElementsByClassName('imgCheckbox')
+            for(let i of imgCheckboxs) {
+                i.style.display = 'inline-block'
+            }
+        }
+
+        function hideCheckbox() {
+            var imgCheckboxs = document.getElementsByClassName('imgCheckbox')
+            for(let i of imgCheckboxs) {
+                i.style.display = 'none'
+            }
+        }
+
+        $scope.checkCheckbox = function() {
+            var imgCheckboxs = document.getElementsByClassName('imgCheckbox')
+            for(let i of imgCheckboxs) {
+                if (i.checked) {
+                    document.getElementById('btnCamera').removeAttribute('disabled')
+                    return;
+                }
+            }
+            document.getElementById('btnCamera').setAttribute('disabled', 'disabled')
+        }
+
+        // Action when click on camera button
+        document.getElementById('btnCamera').addEventListener('click', function() {
+            if (!$scope.isDeleteMode) {
+                if (!isCameraReady) {
+                    activeCamera()
+                } else {
+                    takePicture()
+                }
+            } else {
+                deletePicture()
             }
         })
 
@@ -127,42 +169,6 @@ angular.module('nibs.gallery', [])
             var img = canvas.toDataURL('image/jpeg')
             $state.go("app.preview", {img: img, isUpdateAvatar: false});
         };
-
-        $scope.isSelectMode = false
-        $scope.switchMode = function() {
-            if (!$scope.isSelectMode) {
-                showCheckbox()
-                $scope.isSelectMode = true
-            } else {
-                hideCheckbox()
-                $scope.isSelectMode = false
-            }
-        }
-
-        function showCheckbox() {
-            var imgCheckboxs = document.getElementsByClassName('imgCheckbox')
-            for(let i of imgCheckboxs) {
-                i.style.display = 'inline-block'
-            }
-        }
-
-        function hideCheckbox() {
-            var imgCheckboxs = document.getElementsByClassName('imgCheckbox')
-            for(let i of imgCheckboxs) {
-                i.style.display = 'none'
-            }
-        }
-
-        $scope.checkCheckbox = function() {
-            var imgCheckboxs = document.getElementsByClassName('imgCheckbox')
-            for(let i of imgCheckboxs) {
-                if (i.checked) {
-                    document.getElementById('btnCamera').removeAttribute('disabled')
-                    return;
-                }
-            }
-            document.getElementById('btnCamera').setAttribute('disabled', 'disabled')
-        }
 
         $scope.deletePicture = function() {
             var confirm = $window.confirm('Are you sure?')
