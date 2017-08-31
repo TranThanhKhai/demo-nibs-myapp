@@ -128,12 +128,30 @@ angular.module('nibs.gallery', [])
             $state.go("app.preview", {img: img, isUpdateAvatar: false});
         };
 
-        $scope.showCheckbox = function() {
+        function showCheckbox() {
             var imgCheckboxs = document.getElementsByClassName('imgCheckbox')
             for(let i of imgCheckboxs) {
                 i.style.display = 'inline-block'
             }
         }
+
+        function hideCheckbox() {
+            var imgCheckboxs = document.getElementsByClassName('imgCheckbox')
+            for(let i of imgCheckboxs) {
+                i.style.display = 'none'
+            }
+        }
+
+        document.getElementById('btnSelect').addEventListener('click', function() {
+            if (!$scope.isSelectMode) {
+                showCheckbox()
+                $scope.isSelectMode = true
+            } else {
+                hideCheckbox()
+                $scope.isSelectMode = false
+            }
+            
+        })
 
         $scope.checkCheckbox = function() {
             var imgCheckboxs = document.getElementsByClassName('imgCheckbox')
