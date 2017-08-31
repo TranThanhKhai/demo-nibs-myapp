@@ -46,7 +46,7 @@ angular.module('nibs.gallery', [])
         var isCameraReady = false
         var videoWidth = 0
         var videoHeight = 0
-        $scope.isSelectMode = false
+        var isSelectMode = false
 
         function getPictures() {
             Picture.all().success(function(pictures) {
@@ -144,12 +144,20 @@ angular.module('nibs.gallery', [])
         }
 
         document.getElementById('btnSelect').addEventListener('click', function() {
-            if (!$scope.isSelectMode) {
+            if (!isSelectMode) {
                 showCheckbox()
-                $scope.isSelectMode = true
+                document.getElementById('icon-trash-select').style.display = 'none'
+                document.getElementById('icon-close-circled').style.display = 'block'
+                document.getElementById('icon-ios7-camera').style.display = 'none'
+                document.getElementById('icon-trash-delete').style.display = 'block'
+                isSelectMode = true
             } else {
                 hideCheckbox()
-                $scope.isSelectMode = false
+                document.getElementById('icon-trash-select').style.display = 'block'
+                document.getElementById('icon-close-circled').style.display = 'none'
+                document.getElementById('icon-ios7-camera').style.display = 'block'
+                document.getElementById('icon-trash-delete').style.display = 'none'
+                isSelectMode = false
             }
             
         })
