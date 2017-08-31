@@ -172,7 +172,7 @@ angular.module('nibs.gallery', [])
         };
 
         function deletePicture() {
-            if (checkCheckbox == true) {
+            if (checkCheckbox()) {
                 var confirm = $window.confirm('Are you sure?')
                 if (confirm) {
                     var imgCheckboxs = document.getElementsByClassName('imgCheckbox')
