@@ -146,6 +146,7 @@ angular.module('nibs.gallery', [])
         }
 
         function switchMode() {
+            console.log($scope.isSelectMode)
             if (!isSelectMode) {
                 showCheckbox()
                 // document.getElementById('icon-trash-select').style.display = 'none'
