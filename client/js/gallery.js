@@ -61,8 +61,9 @@ angular.module('nibs.gallery', [])
         }
         getPictures()
 
-        console.log('$stateParams: ' + $stateParams.isUpdateAvatar)
-        
+        console.log('$stateParams: ' + $stateParams)
+        console.log('$stateParams.isUpdateAvatar: ' + $stateParams.isUpdateAvatar)
+
 
         // Show and hide image checkbox
         $scope.switchMode = function() {
