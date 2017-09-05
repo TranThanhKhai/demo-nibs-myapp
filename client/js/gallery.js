@@ -62,11 +62,12 @@ angular.module('nibs.gallery', [])
         getPictures()
 
         
-        $window.bind('load', function() {
+        $window.onload = function() {
+            console.log('onload')
             //if ($stateParams.isUpdateAvatar == 'true') {
                 activeCamera()
             //}
-        })
+        }
 
 
         // Show and hide image checkbox
