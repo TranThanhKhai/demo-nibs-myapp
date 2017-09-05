@@ -46,7 +46,7 @@ angular.module('nibs.gallery', [])
     })
 
     //Controllers
-    .controller('GalleryCtrl', function ($scope, $rootScope, $state, $stateParams, $window, $ionicPopup, Picture, S3Uploader) {
+    .controller('GalleryCtrl', function ($scope, $rootScope, $state, $stateParams, $window, $ionicPopup, Picture) {
         var isCameraReady = false
         var isUpdateAvatar = false
         var videoWidth = 0
