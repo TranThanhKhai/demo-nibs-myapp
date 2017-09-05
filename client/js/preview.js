@@ -24,7 +24,7 @@ angular.module('nibs.preview', ['nibs.profile', 'nibs.gallery'])
             if ($stateParams.isUpdateAvatar == 'true') {
                 $state.go("app.edit-profile")
             } else {
-                $state.go("app.gallery")
+                $state.go("app.gallery", {isUpdateAvatar: false})
             }
         }
 
@@ -55,7 +55,7 @@ angular.module('nibs.preview', ['nibs.profile', 'nibs.gallery'])
                         Picture.create(public_id, secure_url, userId)
                         .success(function(data) {
                             console.log(data)
-                            $state.go('app.gallery')
+                            $state.go('app.gallery', {isUpdateAvatar: false})
                         })
                         .error(function(err) {
                             $ionicPopup.alert({title: 'Sorry', content: 'Insert failed!'});
