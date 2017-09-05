@@ -62,7 +62,7 @@ angular.module('nibs.gallery', [])
         getPictures()
 
         //if ($stateParams.isUpdateAvatar == 'true') {
-        //    activeCamera()
+            activeCamera()
         //}
 
 
