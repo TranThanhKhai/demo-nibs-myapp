@@ -6,7 +6,7 @@ angular.module('nibs.gallery', [])
         $stateProvider
 
             .state('app.gallery', {
-                url: "/gallery/:isActiveCamera",
+                url: "/gallery",
                 views: {
                     'menuContent' :{
                         templateUrl: "templates/gallery.html",
@@ -47,7 +47,6 @@ angular.module('nibs.gallery', [])
     //Controllers
     .controller('GalleryCtrl', function ($scope, $rootScope, $state, $stateParams, $window, $ionicPopup, Picture) {
         var isCameraReady = false
-        var isUpdateAvatar = false
         var videoWidth = 0
         var videoHeight = 0
         $scope.isDeleteMode = false
@@ -58,11 +57,6 @@ angular.module('nibs.gallery', [])
             });
         }
         getPictures()
-
-        if ($stateParams.isActiveCamera == 'true') {
-            isUpdateAvatar = true
-            activeCamera()
-        }
 
         // Show and hide image checkbox
         $scope.switchMode = function() {
@@ -93,9 +87,11 @@ angular.module('nibs.gallery', [])
             var imgCheckboxs = document.getElementsByClassName('imgCheckbox')
             for(let i of imgCheckboxs) {
                 if (i.checked) {
+                    console.log('true')
                     return true
                 }
             }
+            console.log('false')
             return false
         }
 
@@ -175,7 +171,7 @@ angular.module('nibs.gallery', [])
 
             var canvas = document.getElementById('canvas');
             var img = canvas.toDataURL('image/jpeg')
-            $state.go("app.preview", {img: img, isUpdateAvatar: isUpdateAvatar});
+            $state.go("app.preview", {img: img, isUpdateAvatar: false});
         };
 
         function deletePicture() {
