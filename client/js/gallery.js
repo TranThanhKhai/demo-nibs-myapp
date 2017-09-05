@@ -61,6 +61,9 @@ angular.module('nibs.gallery', [])
         }
         getPictures()
 
+        console.log('$stateParams.isUpdateAvatar: ' + $stateParams.isUpdateAvatar)
+        console.log($stateParams.isUpdateAvatar == 'true')
+        console.log($stateParams.isUpdateAvatar == true)
         if ($stateParams.isUpdateAvatar == 'true') {
             activeCamera()
         }
