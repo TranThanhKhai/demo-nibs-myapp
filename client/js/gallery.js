@@ -132,6 +132,8 @@ angular.module('nibs.gallery', [])
                 document.getElementById('canvas').setAttribute('height', this.videoHeight)
                 videoWidth = this.videoWidth
                 videoHeight = this.videoHeight
+                console.log('this.videoWidth: ' + this.videoWidth)
+                console.log('this.videoHeight: ' + this.videoHeight)
                 console.log('onloadedmetadata')
             }
 
