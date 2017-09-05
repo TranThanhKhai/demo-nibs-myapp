@@ -105,7 +105,7 @@ app.get('/pictures', auth.validateToken, pictures.getItems);
 app.post('/pictures', auth.validateToken, pictures.addItem);
 app.delete('/pictures/:publicId', auth.validateToken, pictures.deleteItems);
 app.post('/uploadPicture', auth.validateToken, pictures.uploadPictureToCloud)
-app.get('/pictures/:secure_url', auth.validateToken, pictures.getBySecureURL)
+//app.get('/pictures/:secure_url', auth.validateToken, pictures.getBySecureURL)
 
 app.get('/activities/:offset/:limit', auth.validateToken, activities.getItems);
 app.post('/activities', auth.validateToken, activities.addItem);

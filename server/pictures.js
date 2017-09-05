@@ -69,12 +69,11 @@ function deleteItems(req, res, next) {
  */
 function getItems(req, res, next) {
     var userId = req.userId;
-    db.query("SELECT id, public_id, url, publishDate FROM picture WHERE userId=$1 ORDER BY publishDate DESC LIMIT 10",
-        [userId])
-        .then(function (pictures) {
-            return res.send(JSON.stringify(pictures));
-        })
-        .catch(next);
+    db.query("SELECT id, public_id, url, publishDate FROM picture WHERE userId=$1 ORDER BY publishDate DESC LIMIT 10", [userId])
+    .then(function (pictures) {
+        return res.send(JSON.stringify(pictures));
+    })
+    .catch(next);
 }
 
 function getBySecureURL(req, res, next) {

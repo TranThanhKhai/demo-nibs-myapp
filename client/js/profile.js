@@ -106,12 +106,12 @@ angular.module('nibs.profile', ['nibs.gallery', 'nibs.config', 'nibs.status'])
         User.get().success(function(user) {
             $scope.user = user;
             if (user.pictureurl != '') {
-                Picture.getBySecureURL(user.pictureurl)
-                .success(function(result) {
-                    console.log('result: ' + JSON.stringify(result))
-                    var publicId = result.public_id
-                    console.log('publicId: ' + publicId)
-                })
+                // Picture.getBySecureURL(user.pictureurl)
+                // .success(function(result) {
+                //     console.log('result: ' + JSON.stringify(result))
+                //     var publicId = result.public_id
+                //     console.log('publicId: ' + publicId)
+                // })
             }
         });
         $scope.preferences = Preference.all();
