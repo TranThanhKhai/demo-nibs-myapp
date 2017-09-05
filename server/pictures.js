@@ -23,7 +23,7 @@ function addItem(req, res, next) {
     var secure_url = req.body.secure_url
     var userId = req.userId
 
-    db.query('INSERT INTO picture (public_id, url, userId) VALUES ($1, $2, $3, $4)', [public_id, secure_url, userId], true)
+    db.query('INSERT INTO picture (public_id, url, userId) VALUES ($1, $2, $3)', [public_id, secure_url, userId], true)
         .then(function () {
             return res.send('ok');
         })
