@@ -1,4 +1,4 @@
-angular.module('nibs.profile', ['nibs.s3uploader', 'nibs.config', 'nibs.status'])
+angular.module('nibs.profile', ['nibs.gallery', 'nibs.config', 'nibs.status'])
 
     // Routes
     .config(function ($stateProvider) {
@@ -101,10 +101,18 @@ angular.module('nibs.profile', ['nibs.s3uploader', 'nibs.config', 'nibs.status']
 
     })
 
-    .controller('EditProfileCtrl', function ($scope, $state, $window, $ionicPopup, S3Uploader, User, Preference, Size, Status) {
-
+    .controller('EditProfileCtrl', function ($scope, $state, $window, $ionicPopup, User, Picture, Preference, Size, Status) {
+        var publicId
         User.get().success(function(user) {
             $scope.user = user;
+            if (user.pictureurl != '') {
+                Picture.getBySecureURL(user.pictureurl)
+                .success(function(result) {
+                    console.log('result: ' + result)
+                    var publicId = result.public_id
+                    console.log('publicId: ' + publicId)
+                })
+            }
         });
         $scope.preferences = Preference.all();
         $scope.sizes = Size.all();

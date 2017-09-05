@@ -23,10 +23,11 @@ angular.module('nibs.gallery', [])
             all: function() {
                 return $http.get($rootScope.server.url + '/pictures');
             },
-            create: function(public_id, url, userId) {
+            create: function(public_id, url, secure_url, userId) {
                 return $http.post($rootScope.server.url + '/pictures', {
                     public_id: public_id,
                     url: url,
+                    secure_url: secure_url,
                     userId: userId
                 });
             },
@@ -37,6 +38,9 @@ angular.module('nibs.gallery', [])
             },
             delete: function(publicId) {
                 return $http.delete($rootScope.server.url + '/pictures/' + publicId);
+            },
+            getBySecureURL: function(secure_url) {
+                return $http.get($rootScope.server.url + '/pictures/' + secure_url);  
             }
         };
     })

@@ -21,9 +21,10 @@ function addItem(req, res, next) {
 
     var public_id = req.body.public_id
     var url = req.body.url
+    var secure_url = req.body.secure_url
     var userId = req.userId
 
-    db.query('INSERT INTO picture (public_id, url, userId) VALUES ($1, $2, $3)', [public_id, url, userId], true)
+    db.query('INSERT INTO picture (public_id, url, secure_url, userId) VALUES ($1, $2, $3, $4)', [public_id, url, secure_url, userId], true)
         .then(function () {
             return res.send('ok');
         })
@@ -51,7 +52,6 @@ function deleteItems(req, res, next) {
         if (!error) {
             db.query('DELETE FROM public.picture WHERE public_id = $1', [publicId], true)
             .then(function(result) {
-                console.log('result: ' + result)
                 return res.send('ok');
             })
             .catch(next);
@@ -78,6 +78,15 @@ function getItems(req, res, next) {
         .catch(next);
 }
 
+function getBySecureURL(req, res, next) {
+    var secure_url = req.params.secure_url
+    db.query("SELECT id, public_id FROM picture WHERE secure_url = $1", [secure_url], true)
+    .then(function(result) {
+        return res.send(JSON.stringify(result))
+    })
+    .catch(next)
+}
+
 function uploadPictureToCloud(req, res, next) {
     var file = req.body.file;
     cloudinary.uploader.upload(file, function(result) {
@@ -85,7 +94,16 @@ function uploadPictureToCloud(req, res, next) {
     })
 }
 
+function destroyPictureFromCloud(req, res, next) {
+    var publicId = req.body.publicId
+    cloudinary.uploader.destroy(publicId, function(result) {
+        return res.send('ok')
+    })
+}
+
 exports.addItem = addItem;
 exports.deleteItems = deleteItems;
 exports.getItems = getItems;
 exports.uploadPictureToCloud = uploadPictureToCloud;
+exports.destroyPictureFromCloud = destroyPictureFromCloud;
+exports.getBySecureURL = getBySecureURL;

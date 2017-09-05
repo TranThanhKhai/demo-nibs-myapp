@@ -53,7 +53,7 @@ angular.module('nibs.preview', ['nibs.profile', 'nibs.gallery'])
                             $ionicPopup.alert({title: 'Sorry', content: 'Update avatar failed!'});
                         })
                     } else {
-                        Picture.create(public_id, url, userId)
+                        Picture.create(public_id, url, secure_url, userId)
                         .success(function(data) {
                             console.log(data)
                             $state.go('app.gallery')
