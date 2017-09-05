@@ -20,11 +20,10 @@ function addItem(req, res, next) {
     // .catch(next);
 
     var public_id = req.body.public_id
-    var url = req.body.url
     var secure_url = req.body.secure_url
     var userId = req.userId
 
-    db.query('INSERT INTO picture (public_id, url, secure_url, userId) VALUES ($1, $2, $3, $4)', [public_id, url, secure_url, userId], true)
+    db.query('INSERT INTO picture (public_id, url, userId) VALUES ($1, $2, $3, $4)', [public_id, secure_url, userId], true)
         .then(function () {
             return res.send('ok');
         })
@@ -50,7 +49,7 @@ function deleteItems(req, res, next) {
         console.log('result: ' + result)
         console.log('error: ' + error)
         if (!error) {
-            db.query('DELETE FROM public.picture WHERE public_id = $1', [publicId], true)
+            db.query('DELETE FROM picture WHERE public_id = $1', [publicId], true)
             .then(function(result) {
                 return res.send('ok');
             })
@@ -80,7 +79,7 @@ function getItems(req, res, next) {
 
 function getBySecureURL(req, res, next) {
     var secure_url = req.body.secure_url
-    db.query("SELECT id, public_id, secure_url FROM picture WHERE secure_url = $1", [secure_url], true)
+    db.query("SELECT id, public_id, url FROM picture WHERE url = $1", [secure_url], true)
     .then(function(result) {
         return res.send(JSON.stringify(result))
     })
