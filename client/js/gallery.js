@@ -6,7 +6,7 @@ angular.module('nibs.gallery', [])
         $stateProvider
 
             .state('app.gallery', {
-                url: "/gallery/:isUpdateAvatar",
+                url: "/gallery",
                 views: {
                     'menuContent' :{
                         templateUrl: "templates/gallery.html",
@@ -61,13 +61,9 @@ angular.module('nibs.gallery', [])
         }
         getPictures()
 
-        console.log('$stateParams.isUpdateAvatar: ' + $stateParams.isUpdateAvatar)
-        console.log($stateParams.isUpdateAvatar == 'true')
-        console.log($stateParams.isUpdateAvatar == true)
-        if ($stateParams.isUpdateAvatar == 'true') {
-            console.log('activecamera')
-            activeCamera()
-        }
+        //if ($stateParams.isUpdateAvatar == 'true') {
+        //    activeCamera()
+        //}
 
 
         // Show and hide image checkbox
@@ -187,7 +183,7 @@ angular.module('nibs.gallery', [])
 
             var canvas = document.getElementById('canvas');
             var img = canvas.toDataURL('image/jpeg')
-            $state.go("app.preview", {img: img, isUpdateAvatar: $stateParams.isUpdateAvatar});
+            $state.go("app.preview", {img: img, isUpdateAvatar: true});
         };
 
         function deletePicture() {
