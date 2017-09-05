@@ -116,40 +116,7 @@ angular.module('nibs.profile', ['nibs.s3uploader', 'nibs.config', 'nibs.status']
             })
         };
 
-        function errBack() {
-            $ionicPopup.alert({title: 'Sorry', content: "Something went wrong!"});
+        $scope.activeCamera = function() {
+            $state.go("app.gallery", {isActiveCamera: true});
         }
-
-        var videoWidth = 0
-        var videoHeight = 0
-        var video = document.getElementById('video');
-
-        // Get camera size
-        video.onloadedmetadata = function(){
-            videoWidth = this.videoWidth
-            videoHeight = this.videoHeight
-        }
-
-        // Get access to the camera!
-        if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-            var constraints = {video: { facingMode: "user"}, audio: false} // user front camera
-            navigator.mediaDevices.getUserMedia(constraints)
-            .then(function(stream) {
-                video.src = window.URL.createObjectURL(stream);
-                video.play();
-            }, errBack);
-        }
-
-        // Trigger photo take
-        $scope.takePicture = function() {
-            // Elements for taking the snapshot
-            var video = document.getElementById('video');
-            var canvas = document.getElementById('canvas');
-            var context = canvas.getContext('2d');
-            context.drawImage(video, 0, 0, videoWidth, videoHeight);
-
-            var canvas = document.getElementById('canvas');
-            var img = canvas.toDataURL('image/jpeg')
-            $state.go("app.preview", {img: img, isUpdateAvatar: true});
-        };
     });

@@ -21,7 +21,11 @@ angular.module('nibs.preview', ['nibs.profile', 'nibs.gallery'])
     .controller('PreviewCtrl', function ($scope, $rootScope, $state, $stateParams, $window, $ionicPopup, Picture, User) {
         document.getElementById('preview_img').src = $stateParams.img
         $scope.back = function() {
-            $state.go("app.gallery")
+            if ($stateParams.isUpdateAvatar == 'true') {
+                $state.go("app.edit-profile")    
+            } else {
+                $state.go("app.gallery")    
+            }
         }
 
         $scope.upload = function() {
