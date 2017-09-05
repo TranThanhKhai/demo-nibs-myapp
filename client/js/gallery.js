@@ -39,9 +39,7 @@ angular.module('nibs.gallery', [])
                 return $http.delete($rootScope.server.url + '/pictures/' + publicId);
             },
             getBySecureURL: function(secure_url) {
-                return $http.get($rootScope.server.url + '/pictures', {
-                    secure_url: secure_url
-                });  
+                return $http.get($rootScope.server.url + '/pictures/' + secure_url);  
             }
         };
     })
