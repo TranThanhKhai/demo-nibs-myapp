@@ -65,6 +65,7 @@ angular.module('nibs.gallery', [])
         console.log($stateParams.isUpdateAvatar == 'true')
         console.log($stateParams.isUpdateAvatar == true)
         if ($stateParams.isUpdateAvatar == 'true') {
+            console.log('activecamera')
             activeCamera()
         }
 
@@ -131,6 +132,7 @@ angular.module('nibs.gallery', [])
                 document.getElementById('canvas').setAttribute('height', this.videoHeight)
                 videoWidth = this.videoWidth
                 videoHeight = this.videoHeight
+                console.log('onloadedmetadata')
             }
 
             // Older browsers might not implement mediaDevices at all, so we set an empty object first
@@ -166,6 +168,7 @@ angular.module('nibs.gallery', [])
                 .then(function(stream) {
                     video.src = window.URL.createObjectURL(stream);
                     video.play();
+                    console.log('video play')
                 }, function(err) {
                     $ionicPopup.alert({title: 'Sorry', content: "カメラが利用できません"});
                 });
