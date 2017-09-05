@@ -6,7 +6,7 @@ angular.module('nibs.gallery', [])
         $stateProvider
 
             .state('app.gallery', {
-                url: "/gallery",
+                url: "/gallery/:isUpdateAvatar",
                 views: {
                     'menuContent' :{
                         templateUrl: "templates/gallery.html",
@@ -60,6 +60,9 @@ angular.module('nibs.gallery', [])
             });
         }
         getPictures()
+
+        console.log('$stateParams: ' + $stateParams.isUpdateAvatar)
+        
 
         // Show and hide image checkbox
         $scope.switchMode = function() {
