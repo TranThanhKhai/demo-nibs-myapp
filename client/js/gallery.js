@@ -48,7 +48,7 @@ angular.module('nibs.gallery', [])
     })
 
     //Controllers
-    .controller('GalleryCtrl', function ($scope, $rootScope, $state, $stateParams, $window, $ionicPopup, Picture) {
+    .controller('GalleryCtrl', function ($scope, $rootScope, $window, $state, $stateParams, $window, $ionicPopup, Picture) {
         var isCameraReady = false
         var videoWidth = 0
         var videoHeight = 0
@@ -61,9 +61,12 @@ angular.module('nibs.gallery', [])
         }
         getPictures()
 
-        //if ($stateParams.isUpdateAvatar == 'true') {
-            activeCamera()
-        //}
+        
+        $window.onload = function() {
+            //if ($stateParams.isUpdateAvatar == 'true') {
+                activeCamera()
+            //}
+        }
 
 
         // Show and hide image checkbox
