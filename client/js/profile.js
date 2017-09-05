@@ -108,7 +108,7 @@ angular.module('nibs.profile', ['nibs.gallery', 'nibs.config', 'nibs.status'])
             if (user.pictureurl != '') {
                 Picture.getBySecureURL(user.pictureurl)
                 .success(function(result) {
-                    console.log('result: ' + result)
+                    console.log('result: ' + JSON.stringify(result))
                     var publicId = result.public_id
                     console.log('publicId: ' + publicId)
                 })
