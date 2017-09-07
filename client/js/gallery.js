@@ -54,36 +54,15 @@ angular.module('nibs.gallery', [])
         var videoHeight = 0
         $scope.isDeleteMode = false
 
-        // if ($window.localStorage.updateAvatarFlg == 'true') {
-        //     activeCamera()
-        // } else {
-        //     $window.localStorage.updateAvatarFlg == 'false';
-        // }
-
-        //$scope.load = function() {
-            //if ($window.localStorage.updateAvatarFlg == 'true') {
-            //alert('load gallery')
-                //activeCamera()
-            //} else {
-            //    $window.localStorage.updateAvatarFlg == 'false';
-            //}
-            getPictures()
-        //}
-
-        // $scope.$on('$stateChangeSuccess', function () {
-        //     alert('onload ctrl111')
-        //     activeCamera()
-        // });
-
         $scope.$watch('$viewContentLoaded', function() {
-            alert('onload ctrl222')
-            activeCamera()
+            if ($window.localStorage.updateAvatarFlg == 'true') {
+                activeCamera()
+            } else {
+                $window.localStorage.updateAvatarFlg == 'false';
+            }
+            getPictures()
         })
 
-        // angular.element($window).bind('load', function() {
-
-        //     alert('onload ctrl')
-        // });
 
         function getPictures() {
             Picture.all().success(function(pictures) {
@@ -169,13 +148,13 @@ angular.module('nibs.gallery', [])
 
             // Get access to the camera!
             var video = document.getElementById('video');
-            
             if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
                 var constraints = {video: { facingMode: "environment"}, audio: false} // use back camera
                 navigator.mediaDevices.getUserMedia(constraints)
                 .then(function(stream) {
                     console.log(video)
                     video.src = window.URL.createObjectURL(stream);
+                    video.play();
                 }, function(err) {
                     $ionicPopup.alert({title: 'Sorry', content: "カメラが利用できません"});
                 });
@@ -191,7 +170,6 @@ angular.module('nibs.gallery', [])
                 document.getElementById('canvas').setAttribute('height', this.videoHeight)
                 videoWidth = this.videoWidth
                 videoHeight = this.videoHeight
-                video.play();
             }
         }
 
