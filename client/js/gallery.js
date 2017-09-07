@@ -70,9 +70,9 @@ angular.module('nibs.gallery', [])
             getPictures()
         //}
 
-        $scope.load = function() {
+        $scope.$on('$stateChangeSuccess', function () {
             alert('onload ctrl')
-        }
+        });
 
         // angular.element($window).bind('load', function() {
 
