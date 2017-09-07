@@ -170,6 +170,7 @@ angular.module('nibs.gallery', [])
                 .then(function(stream) {
                     video.src = window.URL.createObjectURL(stream);
                     video.play();
+                    console.log('video play');
                 }, function(err) {
                     $ionicPopup.alert({title: 'Sorry', content: "カメラが利用できません"});
                 });
