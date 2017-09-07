@@ -21,6 +21,7 @@ angular.module('nibs.preview', ['nibs.profile', 'nibs.gallery'])
     .controller('PreviewCtrl', function ($scope, $rootScope, $state, $stateParams, $window, $ionicPopup, Picture, User) {
         document.getElementById('preview_img').src = $stateParams.img
         $scope.back = function() {
+            $window.localStorage.updateAvatarFlg == 'false';
             if ($window.localStorage.updateAvatarFlg == 'true') {
                 $state.go("app.edit-profile")
             } else {
@@ -61,6 +62,7 @@ angular.module('nibs.preview', ['nibs.profile', 'nibs.gallery'])
                             $ionicPopup.alert({title: 'Sorry', content: 'Insert failed!'});
                         })
                     }
+                    $window.localStorage.updateAvatarFlg == 'false';
                 })
                 .error(function(err) {
                     $ionicPopup.alert({title: 'Sorry', content: 'Upload failed!'});

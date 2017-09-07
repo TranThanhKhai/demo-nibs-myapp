@@ -186,7 +186,7 @@ angular.module('nibs.gallery', [])
 
             var canvas = document.getElementById('canvas');
             var img = canvas.toDataURL('image/jpeg')
-            $state.go("app.preview", {img: img, isUpdateAvatar: $window.localStorage.updateAvatarFlg});
+            $state.go("app.preview", {img: img});
         };
 
         function deletePicture() {
