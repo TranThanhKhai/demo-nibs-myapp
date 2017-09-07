@@ -124,7 +124,7 @@ angular.module('nibs.profile', ['nibs.gallery', 'nibs.config', 'nibs.status'])
             })
         };
 
-        $scope.activeCamera = function() {
-            $state.go("app.gallery", {isUpdateAvatar: true});
-        }
+        // $scope.activeCamera = function() {
+        //     $state.go("app.gallery", {isUpdateAvatar: true});
+        // }
     });
