@@ -48,7 +48,7 @@ angular.module('nibs.gallery', [])
     })
 
     //Controllers
-    .controller('GalleryCtrl', function ($scope, $rootScope, $window, $state, $window, $ionicPopup, Picture) {
+    .controller('GalleryCtrl', function ($scope, $rootScope, $window, $state, $window, $timeout, $ionicPopup, Picture) {
         var cameraActiveFlg = false
         var videoWidth = 0
         var videoHeight = 0
@@ -80,12 +80,12 @@ angular.module('nibs.gallery', [])
 
         // })
 
-        var $scope.init = function(){
+        function init(){
             alert('onload ctrl111')
             activeCamera()
             getPictures()
         }
-        $timeout($scope.init)
+        $timeout(init)
 
         // angular.element($window).bind('load', function() {
 
