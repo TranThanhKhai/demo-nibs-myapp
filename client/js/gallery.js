@@ -166,10 +166,11 @@ angular.module('nibs.gallery', [])
                 navigator.mediaDevices.getUserMedia(constraints)
                 .then(function(stream) {
                     alert('before src: ' + document.getElementById('video'));
+                    console.log('before src: ' + document.getElementById('video'))
                     video.src = window.URL.createObjectURL(stream);
                     alert('after src: ' + document.getElementById('video'));
+                    console.log('before src: ' + document.getElementById('video'))
                     video.play();
-                    alert('after play: ' + document.getElementById('video'));
                 }, function(err) {
                     $ionicPopup.alert({title: 'Sorry', content: "カメラが利用できません"});
                 });
