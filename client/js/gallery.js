@@ -77,7 +77,7 @@ angular.module('nibs.gallery', [])
 
         $scope.$watch('$viewContentLoaded', function() {
             alert('onload ctrl222')
-            activeCamera()
+
         })
 
         // angular.element($window).bind('load', function() {
@@ -169,6 +169,7 @@ angular.module('nibs.gallery', [])
 
             // Get access to the camera!
             var video = document.getElementById('video');
+            
             if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
                 var constraints = {video: { facingMode: "environment"}, audio: false} // use back camera
                 navigator.mediaDevices.getUserMedia(constraints)
