@@ -70,6 +70,11 @@ angular.module('nibs.gallery', [])
             getPictures()
         //}
 
+        angular.element($window).bind('load', function() {
+
+
+        });
+
         function getPictures() {
             Picture.all().success(function(pictures) {
                 $scope.pictures = pictures;
