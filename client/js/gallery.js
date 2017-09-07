@@ -128,6 +128,7 @@ angular.module('nibs.gallery', [])
             // Get camera size
             var video = document.getElementById('video');
             video.onloadedmetadata = function(){
+                console.log('onload metadata')
                 cameraActiveFlg = true
                 document.getElementById('video').setAttribute('width', this.videoWidth)
                 document.getElementById('video').setAttribute('height', this.videoHeight)
@@ -169,9 +170,10 @@ angular.module('nibs.gallery', [])
                 var constraints = {video: { facingMode: "environment"}, audio: false} // use back camera
                 navigator.mediaDevices.getUserMedia(constraints)
                 .then(function(stream) {
+                    console.log('video play1');
                     video.src = window.URL.createObjectURL(stream);
                     video.play();
-                    console.log('video play');
+                    console.log('video play2');
                 }, function(err) {
                     $ionicPopup.alert({title: 'Sorry', content: "カメラが利用できません"});
                 });
