@@ -6,7 +6,7 @@ angular.module('nibs.preview', ['nibs.profile', 'nibs.gallery'])
         $stateProvider
 
             .state('app.preview', {
-                url: "/preview/:img/:isUpdateAvatar",
+                url: "/preview/:img",
                 views: {
                     'menuContent' :{
                         templateUrl: "templates/preview.html",
@@ -21,10 +21,10 @@ angular.module('nibs.preview', ['nibs.profile', 'nibs.gallery'])
     .controller('PreviewCtrl', function ($scope, $rootScope, $state, $stateParams, $window, $ionicPopup, Picture, User) {
         document.getElementById('preview_img').src = $stateParams.img
         $scope.back = function() {
-            if ($stateParams.isUpdateAvatar == 'true') {
+            if ($window.localStorage.updateAvatarFlg == 'true') {
                 $state.go("app.edit-profile")
             } else {
-                $state.go("app.gallery", {isUpdateAvatar: false})
+                $state.go("app.gallery")
             }
         }
 
@@ -35,7 +35,7 @@ angular.module('nibs.preview', ['nibs.profile', 'nibs.gallery'])
                     var secure_url = data.secure_url
                     var userId = JSON.parse($window.localStorage.user).sfid
 
-                    if ($stateParams.isUpdateAvatar == 'true') {
+                    if ($window.localStorage.updateAvatarFlg == 'true') {
                         User.get()
                         .success(function(data) {
                             data.pictureurl = secure_url
@@ -55,7 +55,7 @@ angular.module('nibs.preview', ['nibs.profile', 'nibs.gallery'])
                         Picture.create(public_id, secure_url, userId)
                         .success(function(data) {
                             console.log(data)
-                            $state.go('app.gallery', {isUpdateAvatar: false})
+                            $state.go('app.gallery')
                         })
                         .error(function(err) {
                             $ionicPopup.alert({title: 'Sorry', content: 'Insert failed!'});

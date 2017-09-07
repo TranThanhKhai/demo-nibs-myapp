@@ -48,24 +48,25 @@ angular.module('nibs.gallery', [])
     })
 
     //Controllers
-    .controller('GalleryCtrl', function ($scope, $rootScope, $window, $state, $stateParams, $window, $ionicPopup, Picture) {
-        
+    .controller('GalleryCtrl', function ($scope, $rootScope, $window, $state, $window, $ionicPopup, Picture) {
+        var cameraActiveFlg = false
         var videoWidth = 0
         var videoHeight = 0
         $scope.isDeleteMode = false
+
+        if ($window.localStorage.updateAvatarFlg == 'true') {
+            activeCamera()
+        } else {
+            $window.localStorage.updateAvatarFlg == 'false';
+        }
 
         function getPictures() {
             Picture.all().success(function(pictures) {
                 $scope.pictures = pictures;
             });
         }
-
         getPictures()
-        if ($window.localStorage.cameraStartFlg == 'true') {
-            activeCamera()
-        } else {
-            $window.localStorage.cameraStartFlg = 'false';
-        }
+        
         // angular.element($window).bind('load', function() {
         //     console.log('onload')
         //     activeCamera()
@@ -101,18 +102,16 @@ angular.module('nibs.gallery', [])
             var imgCheckboxs = document.getElementsByClassName('imgCheckbox')
             for(let i of imgCheckboxs) {
                 if (i.checked) {
-                    console.log('true')
                     return true
                 }
             }
-            console.log('false')
             return false
         }
 
         // Action when click on camera button
         document.getElementById('btnCamera').addEventListener('click', function() {
             if (!$scope.isDeleteMode) {
-                if ($window.localStorage.cameraStartFlg != 'true') {
+                if (!cameraActiveFlg) {
                     activeCamera()
                 } else {
                     takePicture()
@@ -126,7 +125,7 @@ angular.module('nibs.gallery', [])
             // Get camera size
             var video = document.getElementById('video');
             video.onloadedmetadata = function(){
-                $window.localStorage.cameraStartFlg = 'true'
+                cameraActiveFlg = true
                 document.getElementById('video-frame').style.display = 'block'
                 document.getElementById('video').setAttribute('width', this.videoWidth)
                 document.getElementById('video').setAttribute('height', this.videoHeight)
@@ -134,9 +133,6 @@ angular.module('nibs.gallery', [])
                 document.getElementById('canvas').setAttribute('height', this.videoHeight)
                 videoWidth = this.videoWidth
                 videoHeight = this.videoHeight
-                console.log('this.videoWidth: ' + this.videoWidth)
-                console.log('this.videoHeight: ' + this.videoHeight)
-                console.log('onloadedmetadata')
             }
 
             // Older browsers might not implement mediaDevices at all, so we set an empty object first
@@ -172,7 +168,6 @@ angular.module('nibs.gallery', [])
                 .then(function(stream) {
                     video.src = window.URL.createObjectURL(stream);
                     video.play();
-                    console.log('video play')
                 }, function(err) {
                     $ionicPopup.alert({title: 'Sorry', content: "カメラが利用できません"});
                 });
@@ -189,7 +184,7 @@ angular.module('nibs.gallery', [])
 
             var canvas = document.getElementById('canvas');
             var img = canvas.toDataURL('image/jpeg')
-            $state.go("app.preview", {img: img, isUpdateAvatar: true});
+            $state.go("app.preview", {img: img, isUpdateAvatar: $window.localStorage.updateAvatarFlg});
         };
 
         function deletePicture() {
