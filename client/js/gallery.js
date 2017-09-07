@@ -60,14 +60,14 @@ angular.module('nibs.gallery', [])
         //     $window.localStorage.updateAvatarFlg == 'false';
         // }
 
-        $scope.load = function() {
+        //$scope.load = function() {
             if ($window.localStorage.updateAvatarFlg == 'true') {
                 activeCamera()
             } else {
                 $window.localStorage.updateAvatarFlg == 'false';
             }
             getPictures()
-        }
+        //}
 
         function getPictures() {
             Picture.all().success(function(pictures) {
