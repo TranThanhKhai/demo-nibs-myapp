@@ -132,6 +132,7 @@ angular.module('nibs.gallery', [])
         function activeCamera() {
             // Get camera size
             var video = document.getElementById('video');
+            console.log(video)
             video.onloadedmetadata = function(){
                 console.log('onload metadata')
                 cameraActiveFlg = true
