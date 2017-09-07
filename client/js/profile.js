@@ -102,7 +102,7 @@ angular.module('nibs.profile', ['nibs.gallery', 'nibs.config', 'nibs.status'])
     })
 
     .controller('EditProfileCtrl', function ($scope, $state, $window, $ionicPopup, User, Picture, Preference, Size, Status) {
-        var publicId
+        var publicId;
         User.get().success(function(user) {
             $scope.user = user;
             if (user.pictureurl != '') {
@@ -125,6 +125,6 @@ angular.module('nibs.profile', ['nibs.gallery', 'nibs.config', 'nibs.status'])
         };
 
         $scope.activeCamera = function() {
-            $state.go("app.gallery");
+            $state.go("app.gallery", {isUpdateAvatar: true});
         }
     });

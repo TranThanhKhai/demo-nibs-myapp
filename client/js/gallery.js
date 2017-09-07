@@ -12,6 +12,9 @@ angular.module('nibs.gallery', [])
                         templateUrl: "templates/gallery.html",
                         controller: "GalleryCtrl"
                     }
+                },
+                params: { 
+                    isUpdateAvatar: null 
                 }
             })
 
@@ -61,9 +64,10 @@ angular.module('nibs.gallery', [])
         }
         getPictures()
 
-        //if ($stateParams.isUpdateAvatar == 'true') {
+        console.log($stateParams.isUpdateAvatar);
+        if ($stateParams.isUpdateAvatar == 'true') {
             activeCamera()
-        //}
+        }
         // angular.element($window).bind('load', function() {
         //     console.log('onload')
         //     activeCamera()
