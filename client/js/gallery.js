@@ -70,9 +70,11 @@ angular.module('nibs.gallery', [])
             //getPictures()
         //}
 
-        $window.onload = function() {
-            alert('load gallery')
-        }
+        $window.addEventListener('load', 
+            function() { 
+                alert('hello!');
+                activeCamera()
+        }, false);
 
         function getPictures() {
             Picture.all().success(function(pictures) {
