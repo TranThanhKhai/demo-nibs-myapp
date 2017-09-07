@@ -143,6 +143,8 @@ angular.module('nibs.gallery', [])
                 document.getElementById('canvas').setAttribute('height', this.videoHeight)
                 videoWidth = this.videoWidth
                 videoHeight = this.videoHeight
+                $scope.a = videoWidth;
+                $scope.b = videoHeight;
             }
 
             // Older browsers might not implement mediaDevices at all, so we set an empty object first
