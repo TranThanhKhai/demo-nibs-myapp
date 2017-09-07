@@ -71,8 +71,13 @@ angular.module('nibs.gallery', [])
         //}
 
         $scope.$on('$stateChangeSuccess', function () {
-            alert('onload ctrl')
+            alert('onload ctrl111')
         });
+
+        $scope.$watch('$viewContentLoaded', function() {
+            alert('onload ctrl222')
+
+        }
 
         // angular.element($window).bind('load', function() {
 
@@ -169,7 +174,6 @@ angular.module('nibs.gallery', [])
                 navigator.mediaDevices.getUserMedia(constraints)
                 .then(function(stream) {
                     console.log(video)
-                    alert(video)
                     video.src = window.URL.createObjectURL(stream);
                 }, function(err) {
                     $ionicPopup.alert({title: 'Sorry', content: "カメラが利用できません"});
