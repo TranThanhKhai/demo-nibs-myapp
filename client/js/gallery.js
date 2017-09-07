@@ -61,10 +61,10 @@ angular.module('nibs.gallery', [])
         // }
 
         $scope.load = function() {
-            if ($window.sessionStorage.updateAvatarFlg == 'true') {
+            if ($window.localStorage.updateAvatarFlg == 'true') {
                 activeCamera()
             } else {
-                $window.sessionStorage.updateAvatarFlg == 'false';
+                $window.localStorage.updateAvatarFlg == 'false';
             }
             getPictures()
         }
