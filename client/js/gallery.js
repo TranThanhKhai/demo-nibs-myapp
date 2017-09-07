@@ -168,11 +168,12 @@ angular.module('nibs.gallery', [])
 
             // Get access to the camera!
             var video = document.getElementById('video');
-            
+            alert(video)
             if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
                 var constraints = {video: { facingMode: "environment"}, audio: false} // use back camera
                 navigator.mediaDevices.getUserMedia(constraints)
                 .then(function(stream) {
+                    alert(video)
                     console.log(video)
                     video.src = window.URL.createObjectURL(stream);
                 }, function(err) {
