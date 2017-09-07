@@ -63,7 +63,6 @@ angular.module('nibs.gallery', [])
             getPictures()
         })
 
-
         function getPictures() {
             Picture.all().success(function(pictures) {
                 $scope.pictures = pictures;
@@ -148,13 +147,13 @@ angular.module('nibs.gallery', [])
 
             // Get access to the camera!
             var video = document.getElementById('video');
+            
             if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
                 var constraints = {video: { facingMode: "environment"}, audio: false} // use back camera
                 navigator.mediaDevices.getUserMedia(constraints)
                 .then(function(stream) {
                     console.log(video)
                     video.src = window.URL.createObjectURL(stream);
-                    video.play();
                 }, function(err) {
                     $ionicPopup.alert({title: 'Sorry', content: "カメラが利用できません"});
                 });
@@ -170,6 +169,7 @@ angular.module('nibs.gallery', [])
                 document.getElementById('canvas').setAttribute('height', this.videoHeight)
                 videoWidth = this.videoWidth
                 videoHeight = this.videoHeight
+                video.play();
             }
         }
 

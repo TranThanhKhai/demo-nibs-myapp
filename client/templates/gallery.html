@@ -1,5 +1,4 @@
 <ion-view title="ギャラリー" style="background-color: black;">
-    <div ng-init="load()">
     <ion-nav-buttons side="left">
         <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
     </ion-nav-buttons>
@@ -18,8 +17,8 @@
 
         <div id="video-frame" style="max-width: 640px; margin: 0 auto; display: none;">
             <video id="video" 
-                   width="640" 
-                   height="480" 
+                   width="0" 
+                   height="0" 
                    autoplay></video>
         </div>
 
