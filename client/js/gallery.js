@@ -64,7 +64,7 @@ angular.module('nibs.gallery', [])
             activeCamera()
         });
 
-        $window.document.onload = function() {
+        document.getElementById('video').onload = function() {
             console.log('onload1');
             activeCamera();
         }
