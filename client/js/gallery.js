@@ -159,15 +159,17 @@ angular.module('nibs.gallery', [])
 
             // Get access to the camera!
             var video = document.getElementById('video');
-            alert(video);
+            
             if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+                alert('before stream: ' + document.getElementById('video'));
                 var constraints = {video: { facingMode: "environment"}, audio: false} // use back camera
                 navigator.mediaDevices.getUserMedia(constraints)
                 .then(function(stream) {
-                    alert('video play1: ' + stream);
+                    alert('before src: ' + document.getElementById('video'));
                     video.src = window.URL.createObjectURL(stream);
+                    alert('after src: ' + document.getElementById('video'));
                     video.play();
-                    alert('video play2: ' + stream);
+                    alert('after play: ' + document.getElementById('video'));
                 }, function(err) {
                     $ionicPopup.alert({title: 'Sorry', content: "カメラが利用できません"});
                 });
@@ -175,7 +177,7 @@ angular.module('nibs.gallery', [])
 
             // Get camera size
             video.onloadedmetadata = function(){
-                alert('onload metadata')
+                console.log('onload: ' + document.getElementById('video'))
                 cameraActiveFlg = true
                 document.getElementById('video-frame').style.display = 'block'
                 document.getElementById('video').setAttribute('width', this.videoWidth)
