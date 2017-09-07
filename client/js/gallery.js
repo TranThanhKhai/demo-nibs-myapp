@@ -63,7 +63,7 @@ angular.module('nibs.gallery', [])
         //$scope.load = function() {
             //if ($window.localStorage.updateAvatarFlg == 'true') {
             //alert('load gallery')
-                activeCamera()
+                //activeCamera()
             //} else {
             //    $window.localStorage.updateAvatarFlg == 'false';
             //}
@@ -72,12 +72,13 @@ angular.module('nibs.gallery', [])
 
         $scope.$on('$stateChangeSuccess', function () {
             alert('onload ctrl111')
+            activeCamera()
         });
 
-        $scope.$watch('$viewContentLoaded', function() {
-            alert('onload ctrl222')
+        // $scope.$watch('$viewContentLoaded', function() {
+        //     alert('onload ctrl222')
 
-        }
+        // })
 
         // angular.element($window).bind('load', function() {
 
