@@ -1,4 +1,4 @@
-angular.module('nibs.gallery', [])
+angular.module('nibs.gallery', ['ui.router'])
 
     // Routes
     .config(function ($stateProvider) {
