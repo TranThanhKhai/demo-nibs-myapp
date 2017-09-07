@@ -67,14 +67,8 @@ angular.module('nibs.gallery', [])
             //} else {
             //    $window.localStorage.updateAvatarFlg == 'false';
             //}
-            //getPictures()
+            getPictures()
         //}
-
-        $window.addEventListener('load', 
-            function() { 
-                alert('hello!');
-                activeCamera()
-        }, false);
 
         function getPictures() {
             Picture.all().success(function(pictures) {
