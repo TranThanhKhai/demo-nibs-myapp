@@ -63,7 +63,7 @@ angular.module('nibs.gallery', ['ui.router'])
             });
         }
         getPictures()
-
+        console.log($stateParams);
         console.log($stateParams.isUpdateAvatar);
         if ($stateParams.isUpdateAvatar == 'true') {
             activeCamera()
