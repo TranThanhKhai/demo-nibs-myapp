@@ -64,6 +64,13 @@ angular.module('nibs.gallery', [])
             activeCamera()
         });
 
+        $window.document.onload = function() {
+            console.log('onload1');
+            activeCamera();
+        }
+
+
+
         function getPictures() {
             Picture.all().success(function(pictures) {
                 $scope.pictures = pictures;
