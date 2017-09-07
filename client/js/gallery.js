@@ -61,16 +61,19 @@ angular.module('nibs.gallery', [])
         // }
 
         $scope.load = function() {
-            alert("Window is loaded");
+            if ($window.localStorage.updateAvatarFlg == 'true') {
+                activeCamera()
+            } else {
+                $window.localStorage.updateAvatarFlg == 'false';
+            }
+            getPictures()
         }
-        
 
         function getPictures() {
             Picture.all().success(function(pictures) {
                 $scope.pictures = pictures;
             });
         }
-        getPictures()
         
         // Show and hide image checkbox
         $scope.switchMode = function() {
