@@ -69,7 +69,7 @@ angular.module('nibs.gallery', [])
             activeCamera();
         }
 
-
+        console.log('abcderf');
 
         function getPictures() {
             Picture.all().success(function(pictures) {
