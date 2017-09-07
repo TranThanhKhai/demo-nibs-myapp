@@ -130,23 +130,6 @@ angular.module('nibs.gallery', [])
         })
 
         function activeCamera() {
-            // Get camera size
-            var video = document.getElementById('video');
-            console.log(video)
-            video.onloadedmetadata = function(){
-                console.log('onload metadata')
-                cameraActiveFlg = true
-                document.getElementById('video-frame').style.display = 'block'
-                document.getElementById('video').setAttribute('width', this.videoWidth)
-                document.getElementById('video').setAttribute('height', this.videoHeight)
-                document.getElementById('canvas').setAttribute('width', this.videoWidth)
-                document.getElementById('canvas').setAttribute('height', this.videoHeight)
-                videoWidth = this.videoWidth
-                videoHeight = this.videoHeight
-                $scope.a = videoWidth;
-                $scope.b = videoHeight;
-            }
-
             // Older browsers might not implement mediaDevices at all, so we set an empty object first
             if (navigator.mediaDevices === undefined) {
                 navigator.mediaDevices = {};
@@ -173,18 +156,34 @@ angular.module('nibs.gallery', [])
                 });
               }
             }
+
             // Get access to the camera!
+            var video = document.getElementById('video');
+            alert(video);
             if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
                 var constraints = {video: { facingMode: "environment"}, audio: false} // use back camera
                 navigator.mediaDevices.getUserMedia(constraints)
                 .then(function(stream) {
-                    console.log('video play1');
+                    alert('video play1: ' + stream);
                     video.src = window.URL.createObjectURL(stream);
                     video.play();
-                    console.log('video play2');
+                    alert('video play2: ' + stream);
                 }, function(err) {
                     $ionicPopup.alert({title: 'Sorry', content: "カメラが利用できません"});
                 });
+            }
+
+            // Get camera size
+            video.onloadedmetadata = function(){
+                alert('onload metadata')
+                cameraActiveFlg = true
+                document.getElementById('video-frame').style.display = 'block'
+                document.getElementById('video').setAttribute('width', this.videoWidth)
+                document.getElementById('video').setAttribute('height', this.videoHeight)
+                document.getElementById('canvas').setAttribute('width', this.videoWidth)
+                document.getElementById('canvas').setAttribute('height', this.videoHeight)
+                videoWidth = this.videoWidth
+                videoHeight = this.videoHeight
             }
         }
 
