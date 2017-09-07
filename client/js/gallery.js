@@ -130,13 +130,14 @@ angular.module('nibs.gallery', [])
             video.onloadedmetadata = function(){
                 console.log('onload metadata')
                 cameraActiveFlg = true
+                document.getElementById('video-frame').style.display = 'block'
                 document.getElementById('video').setAttribute('width', this.videoWidth)
                 document.getElementById('video').setAttribute('height', this.videoHeight)
-                document.getElementById('video-frame').style.display = 'block'
                 document.getElementById('canvas').setAttribute('width', this.videoWidth)
                 document.getElementById('canvas').setAttribute('height', this.videoHeight)
                 videoWidth = this.videoWidth
                 videoHeight = this.videoHeight
+                video.play();
             }
 
             // Older browsers might not implement mediaDevices at all, so we set an empty object first
@@ -172,7 +173,7 @@ angular.module('nibs.gallery', [])
                 .then(function(stream) {
                     console.log('video play1');
                     video.src = window.URL.createObjectURL(stream);
-                    video.play();
+                    
                     console.log('video play2');
                 }, function(err) {
                     $ionicPopup.alert({title: 'Sorry', content: "カメラが利用できません"});
