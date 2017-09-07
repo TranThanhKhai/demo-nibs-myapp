@@ -1,29 +1,17 @@
-angular.module('nibs.gallery', ['ui.router'])
+angular.module('nibs.gallery', [])
 
     // Routes
     .config(function ($stateProvider) {
 
         $stateProvider
 
-            // .state('app.gallery', {
-            //     url: "/gallery",
-            //     views: {
-            //         'menuContent' :{
-            //             templateUrl: "templates/gallery.html",
-            //             controller: "GalleryCtrl"
-            //         }
-            //     },
-            //     params: { 
-            //         isUpdateAvatar: null 
-            //     }
-            // })
-
             .state('app.gallery', {
                 url: "/gallery",
-                templateUrl: "templates/gallery.html",
-                controller: "GalleryCtrl",
-                params: { 
-                    isUpdateAvatar: null 
+                views: {
+                    'menuContent' :{
+                        templateUrl: "templates/gallery.html",
+                        controller: "GalleryCtrl"
+                    }
                 }
             })
 
@@ -61,7 +49,7 @@ angular.module('nibs.gallery', ['ui.router'])
 
     //Controllers
     .controller('GalleryCtrl', function ($scope, $rootScope, $window, $state, $stateParams, $window, $ionicPopup, Picture) {
-        var isCameraReady = false
+        
         var videoWidth = 0
         var videoHeight = 0
         $scope.isDeleteMode = false
@@ -71,12 +59,12 @@ angular.module('nibs.gallery', ['ui.router'])
                 $scope.pictures = pictures;
             });
         }
+
         getPictures()
-        console.log($stateParams.isUpdateAvatar);
-        console.log($state);
-        console.log($state.params);
-        if ($stateParams.isUpdateAvatar == 'true') {
+        if ($window.localStorage.cameraStartFlg == 'true') {
             activeCamera()
+        } else {
+            $window.localStorage.cameraStartFlg = 'false';
         }
         // angular.element($window).bind('load', function() {
         //     console.log('onload')
@@ -124,7 +112,7 @@ angular.module('nibs.gallery', ['ui.router'])
         // Action when click on camera button
         document.getElementById('btnCamera').addEventListener('click', function() {
             if (!$scope.isDeleteMode) {
-                if (!isCameraReady) {
+                if ($window.localStorage.cameraStartFlg != 'true') {
                     activeCamera()
                 } else {
                     takePicture()
@@ -138,7 +126,7 @@ angular.module('nibs.gallery', ['ui.router'])
             // Get camera size
             var video = document.getElementById('video');
             video.onloadedmetadata = function(){
-                isCameraReady = true
+                $window.localStorage.cameraStartFlg = 'true'
                 document.getElementById('video-frame').style.display = 'block'
                 document.getElementById('video').setAttribute('width', this.videoWidth)
                 document.getElementById('video').setAttribute('height', this.videoHeight)
