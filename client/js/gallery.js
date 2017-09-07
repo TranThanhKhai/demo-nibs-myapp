@@ -10,10 +10,10 @@ angular.module('nibs.gallery', ['ui.router'])
                 views: {
                     'menuContent' :{
                         templateUrl: "templates/gallery.html",
-                        controller: "GalleryCtrl",
-                        params: { 
-                            isUpdateAvatar: null 
-                        }
+                        controller: "GalleryCtrl"
+                    },
+                    params: { 
+                        isUpdateAvatar: null 
                     }
                 }
             })
