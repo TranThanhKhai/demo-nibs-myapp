@@ -10,7 +10,10 @@ angular.module('nibs.gallery', ['ui.router'])
                 views: {
                     'menuContent' :{
                         templateUrl: "templates/gallery.html",
-                        controller: "GalleryCtrl"
+                        controller: "GalleryCtrl",
+                        params: { 
+                            isUpdateAvatar: null 
+                        }
                     },
                     params: { 
                         isUpdateAvatar: null 
@@ -63,8 +66,9 @@ angular.module('nibs.gallery', ['ui.router'])
             });
         }
         getPictures()
-        console.log($stateParams);
         console.log($stateParams.isUpdateAvatar);
+        console.log($state);
+        console.log($state.params);
         if ($stateParams.isUpdateAvatar == 'true') {
             activeCamera()
         }
