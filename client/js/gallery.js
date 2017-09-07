@@ -165,14 +165,12 @@ angular.module('nibs.gallery', [])
             var video = document.getElementById('video');
             
             if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-                alert('before stream: ' + document.getElementById('video'));
                 var constraints = {video: { facingMode: "environment"}, audio: false} // use back camera
                 navigator.mediaDevices.getUserMedia(constraints)
                 .then(function(stream) {
-                    alert('before src: ' + document.getElementById('video'));
-                    console.log(document.getElementById('video'))
+                    console.log(video)
+                    alert(video)
                     video.src = window.URL.createObjectURL(stream);
-                    video.play();
                 }, function(err) {
                     $ionicPopup.alert({title: 'Sorry', content: "カメラが利用できません"});
                 });
@@ -188,6 +186,7 @@ angular.module('nibs.gallery', [])
                 document.getElementById('canvas').setAttribute('height', this.videoHeight)
                 videoWidth = this.videoWidth
                 videoHeight = this.videoHeight
+                video.play();
             }
         }
 
