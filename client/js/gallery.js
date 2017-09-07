@@ -54,11 +54,11 @@ angular.module('nibs.gallery', [])
         var videoHeight = 0
         $scope.isDeleteMode = false
 
-        if ($window.localStorage.updateAvatarFlg == 'true') {
-            activeCamera()
-        } else {
-            $window.localStorage.updateAvatarFlg == 'false';
-        }
+        // if ($window.localStorage.updateAvatarFlg == 'true') {
+        //     activeCamera()
+        // } else {
+        //     $window.localStorage.updateAvatarFlg == 'false';
+        // }
 
         function getPictures() {
             Picture.all().success(function(pictures) {
@@ -67,10 +67,10 @@ angular.module('nibs.gallery', [])
         }
         getPictures()
         
-        // angular.element($window).bind('load', function() {
-        //     console.log('onload')
-        //     activeCamera()
-        // });
+        angular.element($window).bind('load', function() {
+            console.log('onload')
+            activeCamera()
+        });
 
 
         // Show and hide image checkbox
