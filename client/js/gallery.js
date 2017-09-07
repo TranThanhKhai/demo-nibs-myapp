@@ -70,13 +70,13 @@ angular.module('nibs.gallery', [])
             getPictures()
         //}
 
-        // $scope.$on('$stateChangeSuccess', function () {
-        //     alert('onload ctrl111')
-        // });
+        $scope.$on('$stateChangeSuccess', function () {
+            alert('onload ctrl111')
+        });
 
         $scope.$watch('$viewContentLoaded', function() {
             alert('onload ctrl222')
-            activeCamera()
+            //activeCamera()
         });
 
         // angular.element($window).bind('load', function() {
