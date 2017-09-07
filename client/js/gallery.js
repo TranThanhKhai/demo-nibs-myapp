@@ -54,14 +54,36 @@ angular.module('nibs.gallery', [])
         var videoHeight = 0
         $scope.isDeleteMode = false
 
-        $scope.$watch('$viewContentLoaded', function() {
-            if ($window.localStorage.updateAvatarFlg == 'true') {
-                activeCamera()
-            } else {
-                $window.localStorage.updateAvatarFlg == 'false';
-            }
+        // if ($window.localStorage.updateAvatarFlg == 'true') {
+        //     activeCamera()
+        // } else {
+        //     $window.localStorage.updateAvatarFlg == 'false';
+        // }
+
+        //$scope.load = function() {
+            //if ($window.localStorage.updateAvatarFlg == 'true') {
+            //alert('load gallery')
+                //activeCamera()
+            //} else {
+            //    $window.localStorage.updateAvatarFlg == 'false';
+            //}
             getPictures()
+        //}
+
+        // $scope.$on('$stateChangeSuccess', function () {
+        //     alert('onload ctrl111')
+        //     activeCamera()
+        // });
+
+        $scope.$watch('$viewContentLoaded', function() {
+            alert('onload ctrl222')
+            activeCamera()
         })
+
+        // angular.element($window).bind('load', function() {
+
+        //     alert('onload ctrl')
+        // });
 
         function getPictures() {
             Picture.all().success(function(pictures) {
@@ -147,7 +169,6 @@ angular.module('nibs.gallery', [])
 
             // Get access to the camera!
             var video = document.getElementById('video');
-            
             if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
                 var constraints = {video: { facingMode: "environment"}, audio: false} // use back camera
                 navigator.mediaDevices.getUserMedia(constraints)
