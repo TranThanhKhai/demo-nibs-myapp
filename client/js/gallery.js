@@ -62,6 +62,7 @@ angular.module('nibs.gallery', [])
 
         //$scope.load = function() {
             //if ($window.localStorage.updateAvatarFlg == 'true') {
+            alert('load gallery')
                 activeCamera()
             //} else {
             //    $window.localStorage.updateAvatarFlg == 'false';
