@@ -59,13 +59,10 @@ angular.module('nibs.gallery', [])
                 $scope.pictures = pictures;
             });
         }
-        getPictures()
 
-        //if ($stateParams.isUpdateAvatar == 'true') {
-            activeCamera()
-        //}
         angular.element($window).bind('load', function() {
             console.log('onload')
+            getPictures()
             activeCamera()
         });
 
