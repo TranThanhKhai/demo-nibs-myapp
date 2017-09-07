@@ -62,13 +62,17 @@ angular.module('nibs.gallery', [])
 
         //$scope.load = function() {
             //if ($window.localStorage.updateAvatarFlg == 'true') {
-            alert('load gallery')
-                activeCamera()
+            //alert('load gallery')
+            //    activeCamera()
             //} else {
             //    $window.localStorage.updateAvatarFlg == 'false';
             //}
-            getPictures()
+            //getPictures()
         //}
+
+        $window.onload = function() {
+            alert('load gallery')
+        }
 
         function getPictures() {
             Picture.all().success(function(pictures) {
@@ -137,7 +141,6 @@ angular.module('nibs.gallery', [])
                 document.getElementById('canvas').setAttribute('height', this.videoHeight)
                 videoWidth = this.videoWidth
                 videoHeight = this.videoHeight
-                video.play();
             }
 
             // Older browsers might not implement mediaDevices at all, so we set an empty object first
@@ -173,7 +176,7 @@ angular.module('nibs.gallery', [])
                 .then(function(stream) {
                     console.log('video play1');
                     video.src = window.URL.createObjectURL(stream);
-                    
+                    video.play();
                     console.log('video play2');
                 }, function(err) {
                     $ionicPopup.alert({title: 'Sorry', content: "カメラが利用できません"});
