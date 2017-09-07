@@ -59,17 +59,11 @@ angular.module('nibs.gallery', [])
         // } else {
         //     $window.localStorage.updateAvatarFlg == 'false';
         // }
-        angular.element($window).bind('load', function() {
-            console.log('onload')
-            activeCamera()
-        });
 
-        document.getElementById('video').onload = function() {
-            console.log('onload1');
-            activeCamera();
+        $scope.load = function() {
+            alert("Window is loaded");
         }
-
-        console.log('abcderf');
+        
 
         function getPictures() {
             Picture.all().success(function(pictures) {
