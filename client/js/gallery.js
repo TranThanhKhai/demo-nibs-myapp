@@ -5,14 +5,23 @@ angular.module('nibs.gallery', ['ui.router'])
 
         $stateProvider
 
+            // .state('app.gallery', {
+            //     url: "/gallery",
+            //     views: {
+            //         'menuContent' :{
+            //             templateUrl: "templates/gallery.html",
+            //             controller: "GalleryCtrl"
+            //         }
+            //     },
+            //     params: { 
+            //         isUpdateAvatar: null 
+            //     }
+            // })
+
             .state('app.gallery', {
                 url: "/gallery",
-                views: {
-                    'menuContent' :{
-                        templateUrl: "templates/gallery.html",
-                        controller: "GalleryCtrl"
-                    }
-                },
+                templateUrl: "templates/gallery.html",
+                controller: "GalleryCtrl",
                 params: { 
                     isUpdateAvatar: null 
                 }
