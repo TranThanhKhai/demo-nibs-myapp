@@ -14,9 +14,6 @@ angular.module('nibs.gallery', ['ui.router'])
                         params: { 
                             isUpdateAvatar: null 
                         }
-                    },
-                    params: { 
-                        isUpdateAvatar: null 
                     }
                 }
             })
