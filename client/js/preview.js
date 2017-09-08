@@ -32,28 +32,29 @@ angular.module('nibs.preview', ['nibs.profile', 'nibs.gallery'])
 
         $scope.upload = function() {
             Picture.upload($stateParams.img)
-                .success(function(data) {
-                    var public_id = data.public_id
-                    var secure_url = data.secure_url
+                .success(function(result) {
+                    var public_id = result.public_id
+                    var secure_url = result.secure_url
                     var userId = JSON.parse($window.localStorage.user).sfid
 
                     if (updateAvatarFlg == 'true') {
                         User.get()
                         .success(function(user) {
+                            console.log('user.pictureurl: ' + user.pictureurl);
                             if (user.pictureurl != '') {
                                 Picture.getBySecureURL(user.pictureurl)
                                 .success(function(result) {
+                                    console.log('result: ' + result);
                                     console.log('result: ' + JSON.stringify(result))
                                     var publicId = result.public_id
                                     console.log('publicId: ' + publicId)
                                 })
                             }
 
-
-                            data.pictureurl = secure_url
-                            User.update(data)
-                            .success(function(data) {
-                                console.log(data)
+                            result.pictureurl = secure_url
+                            User.update(result)
+                            .success(function(result) {
+                                console.log(result)
                                 $state.go('app.edit-profile')
                             })
                             .error(function(err) {
@@ -65,8 +66,8 @@ angular.module('nibs.preview', ['nibs.profile', 'nibs.gallery'])
                         })
                     } else {
                         Picture.create(public_id, secure_url, userId)
-                        .success(function(data) {
-                            console.log(data)
+                        .success(function(result) {
+                            console.log(result)
                             $state.go('app.gallery', {updateAvatarFlg: false})
                         })
                         .error(function(err) {
