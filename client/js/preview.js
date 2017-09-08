@@ -39,7 +39,17 @@ angular.module('nibs.preview', ['nibs.profile', 'nibs.gallery'])
 
                     if (updateAvatarFlg == 'true') {
                         User.get()
-                        .success(function(data) {
+                        .success(function(user) {
+                            if (user.pictureurl != '') {
+                                Picture.getBySecureURL(user.pictureurl)
+                                .success(function(result) {
+                                    console.log('result: ' + JSON.stringify(result))
+                                    var publicId = result.public_id
+                                    console.log('publicId: ' + publicId)
+                                })
+                            }
+
+
                             data.pictureurl = secure_url
                             User.update(data)
                             .success(function(data) {

@@ -37,13 +37,10 @@ angular.module('nibs.gallery', [])
             },
             delete: function(publicId) {
                 return $http.delete($rootScope.server.url + '/pictures/' + publicId);
+            },
+            getBySecureURL: function(secure_url) {
+                return $http.get($rootScope.server.url + '/pictures/' + secure_url);  
             }
-            // ,
-            // getBySecureURL: function(secure_url) {
-            //     return $http.get($rootScope.server.url + '/pictures', {
-            //         secure_url: secure_url
-            //     });  
-            // }
         };
     })
 
@@ -173,7 +170,7 @@ angular.module('nibs.gallery', [])
                 videoWidth = this.videoWidth
                 videoHeight = this.videoHeight
                 video.play();
-                
+
                 document.getElementById('canvas').setAttribute('width', this.videoWidth)
                 document.getElementById('canvas').setAttribute('height', this.videoHeight)
             }
