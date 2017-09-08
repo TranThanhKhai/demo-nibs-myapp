@@ -52,9 +52,6 @@ angular.module('nibs.gallery', [])
         // Tam thoi de biet tren url
         var updateAvatarFlg = $stateParams.updateAvatarFlg;
         console.log(updateAvatarFlg);
-        if (updateAvatarFlg == null) {
-            updateAvatarFlg = true;
-        }
         console.log(updateAvatarFlg == true);
         console.log(updateAvatarFlg === true);
         var cameraActiveFlg = false;
