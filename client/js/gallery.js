@@ -87,10 +87,12 @@ angular.module('nibs.gallery', [])
         }
         // $timeout(init)
 
-        document.addEventListener("DOMContentLoaded", function(event){
+        document.onreadystatechange = function () {
+          if (document.readyState == "interactive") {
             alert('onload ctrl111')
             activeCamera()
-        });
+          }
+        }
 
         // angular.element($window).bind('load', function() {
 
