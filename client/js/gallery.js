@@ -75,17 +75,18 @@ angular.module('nibs.gallery', [])
         //     activeCamera()
         // });
 
-        // $scope.$watch('$viewContentLoaded', function() {
-        //     alert('onload ctrl222')
-
-        // })
-
-        function init(){
-            alert('onload ctrl111')
+        $scope.$watch('$viewContentLoaded', function() {
+            alert('onload ctrl222')
             activeCamera()
             getPictures()
-        }
-        $timeout(init)
+        })
+
+        // function init(){
+        //     alert('onload ctrl111')
+        //     activeCamera()
+        //     getPictures()
+        // }
+        // $timeout(init)
 
         // angular.element($window).bind('load', function() {
 
