@@ -6,7 +6,7 @@ angular.module('nibs.preview', ['nibs.profile', 'nibs.gallery'])
         $stateProvider
 
             .state('app.preview', {
-                url: "/preview/:img",
+                url: "/preview/:img/:updateAvatarFlg",
                 views: {
                     'menuContent' :{
                         templateUrl: "templates/preview.html",
@@ -19,10 +19,11 @@ angular.module('nibs.preview', ['nibs.profile', 'nibs.gallery'])
 
     //Controllers
     .controller('PreviewCtrl', function ($scope, $rootScope, $state, $stateParams, $window, $ionicPopup, Picture, User) {
-        document.getElementById('preview_img').src = $stateParams.img
+        document.getElementById('preview_img').src = $stateParams.img;
+        let updateAvatarFlg = $stateParams.updateAvatarFlg;
+        
         $scope.back = function() {
-            if ($window.localStorage.updateAvatarFlg == 'true') {
-                $window.localStorage.updateAvatarFlg == 'false';
+            if (updateAvatarFlg == 'true') {
                 $state.go("app.edit-profile");
             } else {
                 $state.go("app.gallery");
@@ -36,7 +37,7 @@ angular.module('nibs.preview', ['nibs.profile', 'nibs.gallery'])
                     var secure_url = data.secure_url
                     var userId = JSON.parse($window.localStorage.user).sfid
 
-                    if ($window.localStorage.updateAvatarFlg == 'true') {
+                    if (updateAvatarFlg == 'true') {
                         User.get()
                         .success(function(data) {
                             data.pictureurl = secure_url
@@ -52,7 +53,6 @@ angular.module('nibs.preview', ['nibs.profile', 'nibs.gallery'])
                         .error(function(err) {
                             $ionicPopup.alert({title: 'Sorry', content: 'Update avatar failed!'});
                         })
-                        $window.localStorage.updateAvatarFlg == 'false';
                     } else {
                         Picture.create(public_id, secure_url, userId)
                         .success(function(data) {

@@ -6,7 +6,7 @@ angular.module('nibs.gallery', [])
         $stateProvider
 
             .state('app.gallery', {
-                url: "/gallery",
+                url: "/gallery/:updateAvatarFlg",
                 views: {
                     'menuContent' :{
                         templateUrl: "templates/gallery.html",
@@ -48,19 +48,20 @@ angular.module('nibs.gallery', [])
     })
 
     //Controllers
-    .controller('GalleryCtrl', function ($scope, $rootScope, $window, $state, $window, $timeout, $ionicPopup, Picture) {
-        var cameraActiveFlg = false
-        var videoWidth = 0
-        var videoHeight = 0
-        $scope.isDeleteMode = false
+    .controller('GalleryCtrl', function ($scope, $rootScope, $window, $state, $stateParams, $window, $timeout, $ionicPopup, Picture) {
+        var updateAvatarFlg = $stateParams.updateAvatarFlg;
+        console.log(updateAvatarFlg == true);
+        console.log(updateAvatarFlg === true);
+        var cameraActiveFlg = false;
+        var videoWidth;
+        var videoHeight;
+        $scope.isDeleteMode = false;
 
         $scope.$watch('$viewContentLoaded', 
             function() { 
                 $timeout(function() {
-                    if ($window.localStorage.updateAvatarFlg == 'true') {
+                    if (updateAvatarFlg == 'true') {
                         activeCamera();
-                    } else {
-                        $window.localStorage.updateAvatarFlg == 'false';
                     }
                 },500);    
         });
@@ -166,16 +167,16 @@ angular.module('nibs.gallery', [])
             // Get camera size
             video.onloadedmetadata = function(){
                 cameraActiveFlg = true
+
                 document.getElementById('video-frame').style.display = 'block'
-                // document.getElementById('video').setAttribute('width', this.videoWidth)
-                // document.getElementById('video').setAttribute('height', this.videoHeight)
                 video.setAttribute('width', this.videoWidth)
                 video.setAttribute('height', this.videoHeight)
-                document.getElementById('canvas').setAttribute('width', this.videoWidth)
-                document.getElementById('canvas').setAttribute('height', this.videoHeight)
                 videoWidth = this.videoWidth
                 videoHeight = this.videoHeight
                 video.play();
+
+                document.getElementById('canvas').setAttribute('width', this.videoWidth)
+                document.getElementById('canvas').setAttribute('height', this.videoHeight)
             }
         }
 
@@ -189,7 +190,7 @@ angular.module('nibs.gallery', [])
 
             var canvas = document.getElementById('canvas');
             var img = canvas.toDataURL('image/jpeg')
-            $state.go("app.preview", {img: img});
+            $state.go("app.preview", {img: img, updateAvatarFlg: updateAvatarFlg});
         };
 
         function deletePicture() {
