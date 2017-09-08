@@ -19,7 +19,9 @@
             <video id="video" 
                    width="640" 
                    height="480" 
-                   autoplay></video>
+                   autoplay
+                   ng-include="partialViewUrl" 
+                   onload="init()"></video>
         </div>
 
         <div ng-repeat="picture in pictures">
