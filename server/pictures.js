@@ -43,8 +43,11 @@ function deleteItems(req, res, next) {
     //     .catch(next);
 
     var publicId = req.params.publicId
+    console.log('publicId: ' + publicId)
 
     cloudinary.v2.uploader.destroy(publicId, function(error, result) {
+        console.log('result: ' + result)
+        console.log('error: ' + error)
         if (!error) {
             db.query('DELETE FROM picture WHERE public_id = $1', [publicId], true)
             .then(function(result) {
@@ -53,6 +56,9 @@ function deleteItems(req, res, next) {
             .catch(next);
         }
     })
+    
+    
+    
 }
 
 /**
@@ -71,18 +77,9 @@ function getItems(req, res, next) {
 }
 
 function getBySecureURL(req, res, next) {
-    var secureURL = req.query.secureURL
-    var secureURL2 = req.params.secureURL
-    var secureURL3 = req.body.secureURL
-    console.log('secure_url: ' + secureURL);
-    console.log('secure_url2: ' + secureURL2);
-    console.log('secure_url3: ' + secureURL3);
-    winston.info('secure_url: ' + secureURL)
-    winston.info('secureURL2: ' + secureURL2)
-    winston.info('secureURL3: ' + secureURL3)
-    db.query("SELECT id, public_id FROM picture WHERE secure_url = $1", [secureURL], true)
+    var secure_url = req.params.secure_url
+    db.query("SELECT id, public_id FROM picture WHERE secure_url = $1", [secure_url], true)
     .then(function(result) {
-        console.log(JSON.stringify(result));
         return res.send(JSON.stringify(result))
     })
     .catch(next)
@@ -90,25 +87,21 @@ function getBySecureURL(req, res, next) {
 
 function uploadPictureToCloud(req, res, next) {
     var file = req.body.file;
-    var publicId = req.body.publicId;
-    console.log('publicId: ' + publicId);
-    cloudinary.uploader.upload(file, {public_id: publicId}, function(error, result) {
-        if (error) {
-            return res.send(error);
-        }
-        return res.send(JSON.stringify(result));
+    cloudinary.uploader.upload(file, function(result) {
+        return res.send(JSON.stringify(result))
     })
 }
 
-// function removeAvatar(req, res, next) {
-//     var publicId = req.body.publicId;
-//     cloudinary.v2.uploader.destroy(publicId, function(error, result) {
-//         return res.send('ok');
-//     }
-// }
+function destroyPictureFromCloud(req, res, next) {
+    var publicId = req.body.publicId
+    cloudinary.uploader.destroy(publicId, function(result) {
+        return res.send('ok')
+    })
+}
 
 exports.addItem = addItem;
 exports.deleteItems = deleteItems;
 exports.getItems = getItems;
 exports.uploadPictureToCloud = uploadPictureToCloud;
+exports.destroyPictureFromCloud = destroyPictureFromCloud;
 exports.getBySecureURL = getBySecureURL;
