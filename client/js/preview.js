@@ -30,24 +30,17 @@ angular.module('nibs.preview', ['nibs.profile', 'nibs.gallery'])
             }
         }
 
-
-
-
-
         $scope.upload = function() {
             if (updateAvatarFlg == 'true') {
                 User.get()
                 .success(function(user) {
-                    // delete tren cloud
-
-                    let publicId = 'user_avatar_' + user.id;
+                    let publicId = 'avatar_user_' + user.id;
                     Picture.upload($stateParams.img, publicId)
                     .success(function(result) {
                         // After upload to cloud, set it to user'avatar
                         user.pictureurl = result.secure_url
                         User.update(user)
                         .success(function(user) {
-                            console.log(user)
                             $state.go('app.edit-profile')
                         })
                         .error(function(err) {
@@ -55,13 +48,11 @@ angular.module('nibs.preview', ['nibs.profile', 'nibs.gallery'])
                         })
                     })
                     .error(function(error) {
-                        console.log('error update');
                         $ionicPopup.alert({title: 'Sorry', content: 'Upload failed!'});
                     });
                 })
                 .error(function(err) {
-                    console.log('error get');
-                    $ionicPopup.alert({title: 'Sorry', content: 'Update avatar failed!'});
+                    $ionicPopup.alert({title: 'Sorry', content: 'Get user failed!'});
                 })
             } else {
                 Picture.upload($stateParams.img)
@@ -69,10 +60,9 @@ angular.module('nibs.preview', ['nibs.profile', 'nibs.gallery'])
                     var public_id = result.public_id
                     var secure_url = result.secure_url
                     var userId = JSON.parse($window.localStorage.user).sfid
-                    
+
                     Picture.create(public_id, secure_url, userId)
                     .success(function(result) {
-                        console.log(result)
                         $state.go('app.gallery', {updateAvatarFlg: false})
                     })
                     .error(function(err) {
@@ -80,7 +70,7 @@ angular.module('nibs.preview', ['nibs.profile', 'nibs.gallery'])
                     })
                 })
                 .error(function(result) {
-
+                    $ionicPopup.alert({title: 'Sorry', content: 'Upload failed!'});
                 })
 
                 
