@@ -90,7 +90,10 @@ function getBySecureURL(req, res, next) {
 
 function uploadPictureToCloud(req, res, next) {
     var file = req.body.file;
-    cloudinary.uploader.upload(file, function(result) {
+    var options = req.body.options;
+    console.log('options: ' + options);
+    console.log('options.public_id: ' + options.public_id);
+    cloudinary.uploader.upload(file, options.public_id, function(result) {
         return res.send(JSON.stringify(result))
     })
 }
