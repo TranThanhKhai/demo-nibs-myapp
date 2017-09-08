@@ -173,7 +173,7 @@ angular.module('nibs.gallery', [])
                 navigator.mediaDevices.getUserMedia(constraints)
                 .then(function(stream) {
                     video.src = window.URL.createObjectURL(stream);
-                    video.play();
+                    
                 }, function(err) {
                     $ionicPopup.alert({title: 'Sorry', content: "カメラが利用できません"});
                 });
@@ -191,7 +191,7 @@ angular.module('nibs.gallery', [])
                 document.getElementById('canvas').setAttribute('height', this.videoHeight)
                 videoWidth = this.videoWidth
                 videoHeight = this.videoHeight
-                
+                video.play();
             }
         }
 
