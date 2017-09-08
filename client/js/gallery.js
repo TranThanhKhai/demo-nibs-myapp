@@ -48,7 +48,7 @@ angular.module('nibs.gallery', [])
     })
 
     //Controllers
-    .controller('GalleryCtrl', function ($scope, $rootScope, $window, $state, $window, $timeout, $ionicPopup, Picture) {
+    .controller('GalleryCtrl', function ($scope, $rootScope, $window, $state, $window, $document, $ionicPopup, Picture) {
         var cameraActiveFlg = false
         var videoWidth = 0
         var videoHeight = 0
@@ -71,18 +71,23 @@ angular.module('nibs.gallery', [])
             //getPictures()
         //}
 
-        $scope.init = function(){
-            alert('onload ctrl111')
-            activeCamera()
-            getPictures()
-        }
+        
 
+        $document.ready(function () {
+            alert('onload ctrl111')
+            alert(document.getElementById('video'))
+            activeCamera()
+        });
+
+
+        //------------------
         function getPictures() {
             Picture.all().success(function(pictures) {
                 $scope.pictures = pictures;
             });
         }
-        
+        getPictures()
+
         // Show and hide image checkbox
         $scope.switchMode = function() {
             if (!$scope.isDeleteMode) {
