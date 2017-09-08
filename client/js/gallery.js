@@ -76,7 +76,7 @@ angular.module('nibs.gallery', [])
             function() { 
                 $timeout(function() {
                     activeCamera()
-                },0);    
+                },500);    
         });
 
         // angular.element(document).ready(function () {
