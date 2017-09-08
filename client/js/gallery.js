@@ -72,16 +72,16 @@ angular.module('nibs.gallery', [])
         //}
 
 
-        // $scope.$watch('$viewContentLoaded', 
-        //     function() { 
-        //         $timeout(function() {
-        //             activeCamera()
-        //         },2000);    
-        // });
-
-        angular.element(document).ready(function () {
-            activeCamera()
+        $scope.$watch('$viewContentLoaded', 
+            function() { 
+                $timeout(function() {
+                    activeCamera()
+                },0);    
         });
+
+        // angular.element(document).ready(function () {
+        //     activeCamera()
+        // });
 
 
         //------------------
