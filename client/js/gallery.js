@@ -56,8 +56,6 @@ angular.module('nibs.gallery', [])
         var videoHeight;
         $scope.isDeleteMode = false;
 
-        console.log(updateAvatarFlg);
-
         // Tam thoi dung cach nay, fix sau
         $scope.$watch('$viewContentLoaded', 
             function() { 
@@ -154,7 +152,6 @@ angular.module('nibs.gallery', [])
 
             // Get access to the camera!
             var video = document.getElementById('video');
-            console.log(video)
             if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
                 var constraints = {video: { facingMode: "environment"}, audio: false} // use back camera
                 navigator.mediaDevices.getUserMedia(constraints)
@@ -176,7 +173,7 @@ angular.module('nibs.gallery', [])
                 videoWidth = this.videoWidth
                 videoHeight = this.videoHeight
                 video.play();
-
+                
                 document.getElementById('canvas').setAttribute('width', this.videoWidth)
                 document.getElementById('canvas').setAttribute('height', this.videoHeight)
             }
