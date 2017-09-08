@@ -41,7 +41,7 @@ angular.module('nibs.preview', ['nibs.profile', 'nibs.gallery'])
                     // delete tren cloud
 
                     let publicId = 'user_avatar_' + user.id;
-                    Picture.upload($stateParams.img, {public_id: publicId})
+                    Picture.upload($stateParams.img, publicId)
                     .success(function(result) {
                         console.log(result)
                     })
