@@ -49,7 +49,12 @@ angular.module('nibs.gallery', [])
 
     //Controllers
     .controller('GalleryCtrl', function ($scope, $rootScope, $window, $state, $stateParams, $window, $timeout, $ionicPopup, Picture) {
+        // Tam thoi de biet tren url
         var updateAvatarFlg = $stateParams.updateAvatarFlg;
+        console.log(updateAvatarFlg);
+        if (updateAvatarFlg == null) {
+            updateAvatarFlg = true;
+        }
         console.log(updateAvatarFlg == true);
         console.log(updateAvatarFlg === true);
         var cameraActiveFlg = false;
@@ -57,6 +62,7 @@ angular.module('nibs.gallery', [])
         var videoHeight;
         $scope.isDeleteMode = false;
 
+        // Tam thoi dung cach nay, fix sau
         $scope.$watch('$viewContentLoaded', 
             function() { 
                 $timeout(function() {
