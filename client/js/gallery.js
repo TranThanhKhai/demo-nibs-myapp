@@ -51,13 +51,12 @@ angular.module('nibs.gallery', [])
     .controller('GalleryCtrl', function ($scope, $rootScope, $window, $state, $stateParams, $window, $timeout, $ionicPopup, Picture) {
         // Tam thoi de biet tren url
         var updateAvatarFlg = $stateParams.updateAvatarFlg;
-        console.log(updateAvatarFlg);
-        console.log(updateAvatarFlg == true);
-        console.log(updateAvatarFlg === true);
         var cameraActiveFlg = false;
         var videoWidth;
         var videoHeight;
         $scope.isDeleteMode = false;
+
+        console.log(updateAvatarFlg);
 
         // Tam thoi dung cach nay, fix sau
         $scope.$watch('$viewContentLoaded', 

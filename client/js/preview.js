@@ -21,12 +21,12 @@ angular.module('nibs.preview', ['nibs.profile', 'nibs.gallery'])
     .controller('PreviewCtrl', function ($scope, $rootScope, $state, $stateParams, $window, $ionicPopup, Picture, User) {
         document.getElementById('preview_img').src = $stateParams.img;
         let updateAvatarFlg = $stateParams.updateAvatarFlg;
-        
+
         $scope.back = function() {
             if (updateAvatarFlg == 'true') {
                 $state.go("app.edit-profile");
             } else {
-                $state.go("app.gallery");
+                $state.go("app.gallery", {updateAvatarFlg: false});
             }
         }
 
@@ -57,7 +57,7 @@ angular.module('nibs.preview', ['nibs.profile', 'nibs.gallery'])
                         Picture.create(public_id, secure_url, userId)
                         .success(function(data) {
                             console.log(data)
-                            $state.go('app.gallery')
+                            $state.go('app.gallery', {updateAvatarFlg: false})
                         })
                         .error(function(err) {
                             $ionicPopup.alert({title: 'Sorry', content: 'Insert failed!'});
