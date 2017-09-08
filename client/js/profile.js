@@ -102,7 +102,6 @@ angular.module('nibs.profile', ['nibs.gallery', 'nibs.config', 'nibs.status'])
     })
 
     .controller('EditProfileCtrl', function ($scope, $state, $window, $ionicPopup, User, Picture, Preference, Size, Status) {
-        var publicId;
         User.get().success(function(user) {
             $scope.user = user;
         });
