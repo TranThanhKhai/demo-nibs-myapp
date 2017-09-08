@@ -89,6 +89,7 @@ function uploadPictureToCloud(req, res, next) {
     var file = req.body.file;
     var publicId = req.body.publicId;
     cloudinary.v2.uploader.upload(file, {public_id: publicId}, function(result) {
+        console.log(result);
         return res.send(JSON.stringify(result))
     })
 }

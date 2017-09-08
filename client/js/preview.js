@@ -45,7 +45,19 @@ angular.module('nibs.preview', ['nibs.profile', 'nibs.gallery'])
                     Picture.upload($stateParams.img, publicId)
                     .success(function(result) {
                         console.log('success');
-                        console.log(result)
+                        console.log(result);
+                        var secure_url = result.secure_url
+                        console.log('secure_url: ' + secure_url);
+                        // After upload to cloud, set it to user'avatar
+                        // result.pictureurl = secure_url
+                        // User.update(result)
+                        // .success(function(result) {
+                        //     console.log(result)
+                        //     $state.go('app.edit-profile')
+                        // })
+                        // .error(function(err) {
+                        //     $ionicPopup.alert({title: 'Success', content: 'Update avatar failed!'});
+                        // })
                     })
                     .error(function(error) {
                         console.log('error update');
