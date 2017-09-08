@@ -30,56 +30,68 @@ angular.module('nibs.preview', ['nibs.profile', 'nibs.gallery'])
             }
         }
 
+
+
+
+
         $scope.upload = function() {
-            Picture.upload($stateParams.img)
-                .success(function(result) {
-                    var public_id = result.public_id
-                    var secure_url = result.secure_url
-                    var userId = JSON.parse($window.localStorage.user).sfid
+            if (updateAvatarFlg == 'true') {
+                User.get()
+                .success(function(user) {
+                    // delete tren cloud
 
-                    if (updateAvatarFlg == 'true') {
-                        User.get()
-                        .success(function(user) {
-                            console.log('user.pictureurl: ' + user.pictureurl);
-                            if (user.pictureurl != '') {
-                                Picture.getBySecureURL(user.pictureurl)
-                                .success(function(result) {
-                                    console.log('result: ' + result);
-                                    console.log('result: ' + JSON.stringify(result))
-                                    var publicId = result.public_id
-                                    console.log('publicId: ' + publicId)
-                                })
-                                .error(function(err) {
-                                    console.log(err);
-                                })
-                            }
-
-                            // result.pictureurl = secure_url
-                            // User.update(result)
-                            // .success(function(result) {
-                            //     console.log(result)
-                            //     $state.go('app.edit-profile')
-                            // })
-                            // .error(function(err) {
-                            //     $ionicPopup.alert({title: 'Success', content: 'Update avatar failed!'});
-                            // })
-                        })
-                        .error(function(err) {
-                            $ionicPopup.alert({title: 'Sorry', content: 'Update avatar failed!'});
-                        })
-                    } else {
-                        Picture.create(public_id, secure_url, userId)
-                        .success(function(result) {
-                            console.log(result)
-                            $state.go('app.gallery', {updateAvatarFlg: false})
-                        })
-                        .error(function(err) {
-                            $ionicPopup.alert({title: 'Sorry', content: 'Insert failed!'});
-                        })
-                    }
+                    let publicId = 'user_avatar_' + user.id;
+                    Picture.upload($stateParams.img, {public_id: publicId})
+                    .success(function(result) {
+                        console.log(result)
+                    })
+                    .error(function(error) {
+                        $ionicPopup.alert({title: 'Sorry', content: 'Update avatar failed!'});
+                    });
                 })
                 .error(function(err) {
-                    $ionicPopup.alert({title: 'Sorry', content: 'Upload failed!'});
+                    $ionicPopup.alert({title: 'Sorry', content: 'Update avatar failed!'});
                 })
+            }
+
+
+
+            // ------------------------
+            // Picture.upload($stateParams.img)
+            //     .success(function(result) {
+            //         var public_id = result.public_id
+            //         var secure_url = result.secure_url
+            //         var userId = JSON.parse($window.localStorage.user).sfid
+
+            //         if (updateAvatarFlg == 'true') {
+            //             User.get()
+            //             .success(function(user) {
+            //                 result.pictureurl = secure_url
+            //                 User.update(result)
+            //                 .success(function(result) {
+            //                     console.log(result)
+            //                     $state.go('app.edit-profile')
+            //                 })
+            //                 .error(function(err) {
+            //                     $ionicPopup.alert({title: 'Success', content: 'Update avatar failed!'});
+            //                 })
+            //             })
+            //             .error(function(err) {
+            //                 $ionicPopup.alert({title: 'Sorry', content: 'Update avatar failed!'});
+            //             })
+            //         } else {
+            //             Picture.create(public_id, secure_url, userId)
+            //             .success(function(result) {
+            //                 console.log(result)
+            //                 $state.go('app.gallery', {updateAvatarFlg: false})
+            //             })
+            //             .error(function(err) {
+            //                 $ionicPopup.alert({title: 'Sorry', content: 'Insert failed!'});
+            //             })
+            //         }
+            //     })
+            //     .error(function(err) {
+            //         $ionicPopup.alert({title: 'Sorry', content: 'Upload failed!'});
+            //     })
         }
     });
