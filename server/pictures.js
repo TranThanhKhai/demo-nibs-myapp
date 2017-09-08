@@ -77,6 +77,9 @@ function getBySecureURL(req, res, next) {
     console.log('secure_url: ' + secureURL);
     console.log('secure_url2: ' + secureURL2);
     console.log('secure_url3: ' + secureURL3);
+    winston.info('secure_url: ' + secureURL)
+    winston.info('secureURL2: ' + secureURL2)
+    winston.info('secureURL3: ' + secureURL3)
     db.query("SELECT id, public_id FROM picture WHERE secure_url = $1", [secureURL], true)
     .then(function(result) {
         console.log(JSON.stringify(result));
