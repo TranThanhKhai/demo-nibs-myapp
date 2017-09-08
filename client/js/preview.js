@@ -49,17 +49,20 @@ angular.module('nibs.preview', ['nibs.profile', 'nibs.gallery'])
                                     var publicId = result.public_id
                                     console.log('publicId: ' + publicId)
                                 })
+                                .error(function(err) {
+                                    console.log(err);
+                                })
                             }
 
-                            result.pictureurl = secure_url
-                            User.update(result)
-                            .success(function(result) {
-                                console.log(result)
-                                $state.go('app.edit-profile')
-                            })
-                            .error(function(err) {
-                                $ionicPopup.alert({title: 'Success', content: 'Update avatar failed!'});
-                            })
+                            // result.pictureurl = secure_url
+                            // User.update(result)
+                            // .success(function(result) {
+                            //     console.log(result)
+                            //     $state.go('app.edit-profile')
+                            // })
+                            // .error(function(err) {
+                            //     $ionicPopup.alert({title: 'Success', content: 'Update avatar failed!'});
+                            // })
                         })
                         .error(function(err) {
                             $ionicPopup.alert({title: 'Sorry', content: 'Update avatar failed!'});
