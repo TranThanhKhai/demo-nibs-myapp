@@ -30,9 +30,10 @@ angular.module('nibs.gallery', [])
                     userId: userId
                 });
             },
-            upload: function(img) {
+            upload: function(img, publicId) {
                 return $http.post($rootScope.server.url + '/uploadPicture', {
-                    file: img
+                    file: img,
+                    publicId: publicId
                 });
             },
             delete: function(publicId) {
