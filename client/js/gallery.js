@@ -75,7 +75,7 @@ angular.module('nibs.gallery', [])
         //     activeCamera()
         // });
 
-        $scope.$watch('$viewContentLoaded', function() {
+        $scope.$on('$viewContentLoaded', function() {
             alert('onload ctrl222')
             activeCamera()
             getPictures()
