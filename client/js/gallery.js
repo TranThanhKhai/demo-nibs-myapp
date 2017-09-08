@@ -53,7 +53,7 @@ angular.module('nibs.gallery', [])
         var videoWidth = 0
         var videoHeight = 0
         $scope.isDeleteMode = false
-        $scope.updateAvatarFlg = $window.localStorage.updateAvatarFlg
+        //$scope.updateAvatarFlg = $window.localStorage.updateAvatarFlg
 
         // if ($window.localStorage.updateAvatarFlg == 'true') {
         //     activeCamera()
@@ -172,11 +172,8 @@ angular.module('nibs.gallery', [])
                 var constraints = {video: { facingMode: "environment"}, audio: false} // use back camera
                 navigator.mediaDevices.getUserMedia(constraints)
                 .then(function(stream) {
-                    var video = document.getElementById('video');
-                    console.log(video)
                     video.src = window.URL.createObjectURL(stream);
-                    var video = document.getElementById('video');
-                    console.log(video)
+                    video.play();
                 }, function(err) {
                     $ionicPopup.alert({title: 'Sorry', content: "カメラが利用できません"});
                 });
@@ -186,13 +183,15 @@ angular.module('nibs.gallery', [])
             video.onloadedmetadata = function(){
                 cameraActiveFlg = true
                 document.getElementById('video-frame').style.display = 'block'
-                document.getElementById('video').setAttribute('width', this.videoWidth)
-                document.getElementById('video').setAttribute('height', this.videoHeight)
+                // document.getElementById('video').setAttribute('width', this.videoWidth)
+                // document.getElementById('video').setAttribute('height', this.videoHeight)
+                video.setAttribute('width', this.videoWidth)
+                video.setAttribute('height', this.videoHeight)
                 document.getElementById('canvas').setAttribute('width', this.videoWidth)
                 document.getElementById('canvas').setAttribute('height', this.videoHeight)
                 videoWidth = this.videoWidth
                 videoHeight = this.videoHeight
-                video.play();
+                
             }
         }
 
