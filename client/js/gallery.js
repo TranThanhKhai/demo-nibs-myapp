@@ -80,7 +80,7 @@ angular.module('nibs.gallery', [])
         //     activeCamera()
         // })
 
-        $scope.init = function(){
+        $window.onload = function(){
             alert('onload ctrl111')
             activeCamera()
             //getPictures()
