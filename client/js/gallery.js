@@ -53,6 +53,7 @@ angular.module('nibs.gallery', [])
         var videoWidth = 0
         var videoHeight = 0
         $scope.isDeleteMode = false
+        $scope.updateAvatarFlg = $window.localStorage.updateAvatarFlg
 
         // if ($window.localStorage.updateAvatarFlg == 'true') {
         //     activeCamera()
@@ -73,7 +74,7 @@ angular.module('nibs.gallery', [])
         $scope.init = function(){
             alert('onload ctrl111')
             activeCamera()
-            //getPictures()
+            getPictures()
         }
 
         function getPictures() {

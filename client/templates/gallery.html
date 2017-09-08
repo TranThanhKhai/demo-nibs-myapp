@@ -21,7 +21,9 @@
                    height="480" 
                    autoplay></video>
         </div>
-        {{if(cameraActiveFlg = 'false') init()}}
+        <div ng-if="updateAvatarFlg == false">
+            {{init()}}
+        </div>
 
         <div ng-repeat="picture in pictures">
             <div style="height: 180px; margin-right: 10px; margin-bottom: 10px; color: white; float: left;">
