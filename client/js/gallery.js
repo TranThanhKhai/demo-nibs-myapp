@@ -75,9 +75,8 @@ angular.module('nibs.gallery', [])
         $scope.$watch('$viewContentLoaded', 
             function() { 
                 $timeout(function() {
-                    alert('onload ctrl111')
                     activeCamera()
-                },0);    
+                },2000);    
         });
 
 
