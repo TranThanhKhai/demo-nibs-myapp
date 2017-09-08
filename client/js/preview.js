@@ -32,9 +32,11 @@ angular.module('nibs.preview', ['nibs.profile', 'nibs.gallery'])
 
         $scope.upload = function() {
             if (updateAvatarFlg == 'true') {
+                // Get current user
                 User.get()
                 .success(function(user) {
                     let publicId = 'avatar_user_' + user.id;
+                    // Upload to cloudinary
                     Picture.upload($stateParams.img, publicId)
                     .success(function(result) {
                         // After upload to cloud, set it to user'avatar
@@ -45,7 +47,7 @@ angular.module('nibs.preview', ['nibs.profile', 'nibs.gallery'])
                         })
                         .error(function(err) {
                             $ionicPopup.alert({title: 'Success', content: 'Update avatar failed!'});
-                        })
+                        });
                     })
                     .error(function(error) {
                         $ionicPopup.alert({title: 'Sorry', content: 'Upload failed!'});
@@ -53,14 +55,16 @@ angular.module('nibs.preview', ['nibs.profile', 'nibs.gallery'])
                 })
                 .error(function(err) {
                     $ionicPopup.alert({title: 'Sorry', content: 'Get user failed!'});
-                })
+                });
             } else {
+                // Upload to cloudinary
                 Picture.upload($stateParams.img)
                 .success(function(result) {
                     var public_id = result.public_id
                     var secure_url = result.secure_url
                     var userId = JSON.parse($window.localStorage.user).sfid
 
+                    // Insert to database
                     Picture.create(public_id, secure_url, userId)
                     .success(function(result) {
                         $state.go('app.gallery', {updateAvatarFlg: false})
@@ -71,52 +75,7 @@ angular.module('nibs.preview', ['nibs.profile', 'nibs.gallery'])
                 })
                 .error(function(result) {
                     $ionicPopup.alert({title: 'Sorry', content: 'Upload failed!'});
-                })
-
-                
+                });
             }
-
-
-
-            // ------------------------
-            // Picture.upload($stateParams.img)
-            //     .success(function(result) {
-            //         var public_id = result.public_id
-            //         var secure_url = result.secure_url
-            //         var userId = JSON.parse($window.localStorage.user).sfid
-
-            //         if (updateAvatarFlg == 'true') {
-            //             User.get()
-            //             .success(function(user) {
-
-
-
-            //                 result.pictureurl = secure_url
-            //                 User.update(result)
-            //                 .success(function(result) {
-            //                     console.log(result)
-            //                     $state.go('app.edit-profile')
-            //                 })
-            //                 .error(function(err) {
-            //                     $ionicPopup.alert({title: 'Success', content: 'Update avatar failed!'});
-            //                 })
-            //             })
-            //             .error(function(err) {
-            //                 $ionicPopup.alert({title: 'Sorry', content: 'Update avatar failed!'});
-            //             })
-            //         } else {
-            //             Picture.create(public_id, secure_url, userId)
-            //             .success(function(result) {
-            //                 console.log(result)
-            //                 $state.go('app.gallery', {updateAvatarFlg: false})
-            //             })
-            //             .error(function(err) {
-            //                 $ionicPopup.alert({title: 'Sorry', content: 'Insert failed!'});
-            //             })
-            //         }
-            //     })
-            //     .error(function(err) {
-            //         $ionicPopup.alert({title: 'Sorry', content: 'Upload failed!'});
-            //     })
         }
     });

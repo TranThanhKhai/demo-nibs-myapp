@@ -44,7 +44,7 @@ angular.module('nibs.gallery', [])
 
     //Controllers
     .controller('GalleryCtrl', function ($scope, $rootScope, $window, $state, $stateParams, $window, $timeout, $ionicPopup, Picture) {
-        // Tam thoi de biet tren url
+        // Tam thoi de bien tren url, fix sau
         var updateAvatarFlg = $stateParams.updateAvatarFlg;
         var cameraActiveFlg = false;
         var videoWidth;
@@ -61,7 +61,6 @@ angular.module('nibs.gallery', [])
                 },500);    
         });
 
-        //------------------
         function getPictures() {
             Picture.all().success(function(pictures) {
                 $scope.pictures = pictures;
