@@ -30,7 +30,7 @@ angular.module('nibs.gallery', [])
                     userId: userId
                 });
             },
-            upload: function(img) {
+            upload: function(img, options) {
                 return $http.post($rootScope.server.url + '/uploadPicture', {
                     file: img,
                     options: options
