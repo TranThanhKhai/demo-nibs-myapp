@@ -27,7 +27,6 @@ angular.module('nibs.preview', ['nibs.profile', 'nibs.gallery'])
             } else {
                 $state.go("app.gallery");
             }
-
         }
 
         $scope.upload = function() {

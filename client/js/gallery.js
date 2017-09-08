@@ -53,36 +53,17 @@ angular.module('nibs.gallery', [])
         var videoWidth = 0
         var videoHeight = 0
         $scope.isDeleteMode = false
-        //$scope.updateAvatarFlg = $window.localStorage.updateAvatarFlg
-
-        // if ($window.localStorage.updateAvatarFlg == 'true') {
-        //     activeCamera()
-        // } else {
-        //     $window.localStorage.updateAvatarFlg == 'false';
-        // }
-
-        //$scope.load = function() {
-            //if ($window.localStorage.updateAvatarFlg == 'true') {
-            //alert('load gallery')
-            //    activeCamera()
-            //} else {
-            //    $window.localStorage.updateAvatarFlg == 'false';
-            //}
-            //getPictures()
-        //}
-
 
         $scope.$watch('$viewContentLoaded', 
             function() { 
                 $timeout(function() {
-                    activeCamera()
+                    if ($window.localStorage.updateAvatarFlg == 'true') {
+                        activeCamera();
+                    } else {
+                        $window.localStorage.updateAvatarFlg == 'false';
+                    }
                 },500);    
         });
-
-        // angular.element(document).ready(function () {
-        //     activeCamera()
-        // });
-
 
         //------------------
         function getPictures() {
