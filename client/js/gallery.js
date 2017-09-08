@@ -70,34 +70,11 @@ angular.module('nibs.gallery', [])
             //getPictures()
         //}
 
-        // $scope.$on('$stateChangeSuccess', function () {
-        //     alert('onload ctrl111')
-        //     activeCamera()
-        // });
-
-        // $scope.$watch('$viewContentLoaded', function() {
-        //     alert('onload ctrl222')
-        //     activeCamera()
-        // })
-
-        $window.onload = function(){
+        $scope.init = function(){
             alert('onload ctrl111')
             activeCamera()
             //getPictures()
         }
-        // $timeout(init)
-
-        document.onreadystatechange = function () {
-          if (document.readyState == "interactive") {
-            alert('onload ctrl111')
-            activeCamera()
-          }
-        }
-
-        // angular.element($window).bind('load', function() {
-
-        //     alert('onload ctrl')
-        // });
 
         function getPictures() {
             Picture.all().success(function(pictures) {
