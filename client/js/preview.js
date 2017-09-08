@@ -41,23 +41,18 @@ angular.module('nibs.preview', ['nibs.profile', 'nibs.gallery'])
                     // delete tren cloud
 
                     let publicId = 'user_avatar_' + user.id;
-                    console.log('publicId front: ' + publicId);
                     Picture.upload($stateParams.img, publicId)
                     .success(function(result) {
-                        console.log('success');
-                        console.log(result);
-                        var secure_url = result.secure_url
-                        console.log('secure_url: ' + secure_url);
                         // After upload to cloud, set it to user'avatar
-                        // result.pictureurl = secure_url
-                        // User.update(result)
-                        // .success(function(result) {
-                        //     console.log(result)
-                        //     $state.go('app.edit-profile')
-                        // })
-                        // .error(function(err) {
-                        //     $ionicPopup.alert({title: 'Success', content: 'Update avatar failed!'});
-                        // })
+                        user.pictureurl = result.secure_url
+                        User.update(user)
+                        .success(function(user) {
+                            console.log(user)
+                            $state.go('app.edit-profile')
+                        })
+                        .error(function(err) {
+                            $ionicPopup.alert({title: 'Success', content: 'Update avatar failed!'});
+                        })
                     })
                     .error(function(error) {
                         console.log('error update');
@@ -68,6 +63,27 @@ angular.module('nibs.preview', ['nibs.profile', 'nibs.gallery'])
                     console.log('error get');
                     $ionicPopup.alert({title: 'Sorry', content: 'Update avatar failed!'});
                 })
+            } else {
+                Picture.upload($stateParams.img)
+                .success(function(result) {
+                    var public_id = result.public_id
+                    var secure_url = result.secure_url
+                    var userId = JSON.parse($window.localStorage.user).sfid
+                    
+                    Picture.create(public_id, secure_url, userId)
+                    .success(function(result) {
+                        console.log(result)
+                        $state.go('app.gallery', {updateAvatarFlg: false})
+                    })
+                    .error(function(err) {
+                        $ionicPopup.alert({title: 'Sorry', content: 'Insert failed!'});
+                    })
+                })
+                .error(function(result) {
+
+                })
+
+                
             }
 
 
